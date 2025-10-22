@@ -269,7 +269,7 @@ Header Area
                             <div class="header-info-content">
                                 <span class="header-info-text">Phone Number</span>
                                 <h3 class="header-info-title">
-                                    <a href="tel:+0112345678900">+01 123 456 789 00</a>
+                                    <a href="tel:+94112431722">+94 11-2431722</a>
                                 </h3>
                             </div>
                         </div>
