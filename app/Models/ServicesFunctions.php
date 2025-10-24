@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserRoles extends Model
+class ServicesFunctions extends Model
 {
     use HasFactory;
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-    protected $table = 'user_roles';
+    protected $table = 'services_functions';
 }
