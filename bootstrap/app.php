@@ -11,8 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'setLocale' => \App\Http\Middleware\setLocale::class,
+            'isAdmin' => \App\Http\Middleware\isAdmin::class,
+            'isReservationsManager' => \App\Http\Middleware\isReservationsManager::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+
     })->create();

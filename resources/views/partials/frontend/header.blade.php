@@ -4,7 +4,7 @@
         <div class="widget footer-widget">
             <div class="th-widget-about">
                 <div class="about-logo">
-                    <a href="home-university.html">
+                    <a href="{{ url('/') }}">
                         <img src="{{ asset('assets/common/images/nhda-logo.png') }}" alt="NHDA">
                     </a>
                 </div>
@@ -86,12 +86,12 @@
     <div class="th-menu-area text-center">
         <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
         <div class="mobile-logo">
-            <a href="home-university.html"><img src="{{ asset('assets/common/images/nhda-logo.png') }}" alt="NHDA"></a>
+            <a href="{{ url('/') }}"><img src="{{ asset('assets/common/images/nhda-logo.png') }}" alt="NHDA"></a>
         </div>
         <div class="th-mobile-menu">
             <ul>
                 <li class="menu-item-has-children">
-                    <a href="home-university.html">Home</a>
+                    <a href="{{ url('/') }}">{{ __('navigation.home') }}</a>
                     <ul class="sub-menu">
                         <li><a href="index.html">University Home</a></li>
                         <li><a href="home-admission.html">Admission Home</a></li>
@@ -180,45 +180,42 @@ Header Area
         <div class="container th-container4">
             <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
                 <div class="col-auto d-none d-lg-block">
-                    <div class="header-links">
-                        <ul class="header-left-wrap">
-                            <li>
-                                <div class="dropdown-link">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"> Studients</a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                        <li>
-                                            <a href="#">Scrollship</a>
-                                            <a href="#">Forening</a>
-                                            <a href="#">Online</a>
-                                            <a href="#">Bysexual</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="contact.html">Staff</a></li>
-                            <li><a href="alumni.html">Alumni</a></li>
-                            <li><a href="faculty.html">Faculty</a> </li>
-                            <li><a href="contact.html">Community</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <div class="col-auto">
                     <div class="header-links">
                         <ul class="header-right-wrap">
                             <li><i class="fa-solid fa-user"></i><a href="#login-form" class="popup-content">Login / Register</a></li>
-                            <li><i class="fas fa-comments"></i><a href="faq.html">FAQ</a></li>
                             <li>
                                 <div class="dropdown-link">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('assets/frontend/img/icon/lang.svg') }}" alt=""> </a>
+                                    @if(Session::get('locale') == 'en')
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">English </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
                                         <li>
-                                            <a href="#">German</a>
-                                            <a href="#">French</a>
-                                            <a href="#">Italian</a>
-                                            <a href="#">Latvian</a>
-                                            <a href="#">Spanish</a>
-                                            <a href="#">Greek</a>
+                                            <a href="{{ url('set-localization/si') }}">සිංහල</a>
+                                            <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
                                         </li>
+                                    @elseif(Session::get('locale') == 'si')
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">සිංහල </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                        <li>
+                                            <a href="{{ url('set-localization/en') }}">English</a>
+                                            <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
+                                        </li>
+                                    @elseif(Session::get('locale') == 'ta')
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">தமிழ் </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                        <li>
+                                            <a href="{{ url('set-localization/en') }}">English</a>
+                                            <a href="{{ url('set-localization/si') }}">සිංහල</a>
+                                        </li>
+                                    @else
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">English </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                            <li>
+                                                <a href="{{ url('set-localization/si') }}">සිංහල</a>
+                                                <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
+                                            </li>
+                                    @endif
                                     </ul>
                                 </div>
                             </li>
@@ -233,7 +230,7 @@ Header Area
             <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
                     <div class="header-logo">
-                        <a href="home-university.html">
+                        <a href="{{ url('/') }}">
                             <img src="{{ asset('assets/common/images/nhda-logo.png') }}" alt="NHDA">
                         </a>
                     </div>
@@ -242,23 +239,12 @@ Header Area
                     <div class="header-info-right">
                         <div class="header-info-item">
                             <div class="header-info-icon">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div class="header-info-content">
-                                <span class="header-info-text">Address</span>
-                                <h3 class="header-info-title">
-                                    <a href="#">45 New Eskaton Road, Austria</a>
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="header-info-item">
-                            <div class="header-info-icon">
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
                             <div class="header-info-content">
                                 <span class="header-info-text">Email</span>
                                 <h3 class="header-info-title">
-                                    <a href="tel:mailinfo@example.com">mailinfo@example.com</a>
+                                    <a href="mailto:nhdaemp@gmail.com">nhdaemp@gmail.com</a>
                                 </h3>
                             </div>
                         </div>
@@ -287,67 +273,20 @@ Header Area
                         <div class="col-auto">
                             <div class="header-left d-flex align-items-center">
                                 <div class="header-logo d-block d-sm-none">
-                                    <a href="home-university.html">
+                                    <a href="{{ url('/') }}">
                                         <img src="{{ asset('assets/common/images/nhda-logo.png') }}" alt="NHDA">
                                     </a>
                                 </div>
                                 <div class="header-button d-none d-sm-block">
-                                    <a href="contact.html" class="th-btn">
+                                    <a href="{{ url('/contact-us') }}" class="th-btn">
                                         Get More Info
                                         <img src="{{ asset('assets/frontend/img/icon/right-icon.svg') }}" class="th-arrow" alt="icon">
                                     </a>
                                 </div>
                                 <nav class="main-menu d-none d-xl-block">
                                     <ul>
-                                        <li class="menu-item-has-children">
-                                            <a href="home-university.html">Home</a>
-                                            <ul class="mega-menu mega-menu-content mega-scroll">
-                                                <li>
-                                                    <div class="container">
-                                                        <div class="row gy-4">
-                                                            <div class="col-lg-4">
-                                                                <div class="mega-menu-box">
-                                                                    <div class="mega-menu-img">
-                                                                        <img src="{{ asset('assets/frontend/img/pages/home-university.jpg') }}" alt="Home One">
-                                                                        <div class="btn-wrap">
-                                                                            <a href="home-university.html" class="th-btn">Multipage</a>
-                                                                            <a href="home-university-op.html" class="th-btn">Onepage</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <h3 class="mega-menu-title"><a href="home-university.html">Home University</a></h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="mega-menu-box">
-                                                                    <div class="mega-menu-img">
-                                                                        <img src="{{ asset('assets/frontend/img/pages/home-admission.jpg') }}" alt="Home Two">
-                                                                        <div class="btn-wrap">
-                                                                            <a href="home-admission.html" class="th-btn">Multipage</a>
-                                                                            <a href="home-admission-op.html" class="th-btn">Onepage</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <h3 class="mega-menu-title"><a href="home-admission.html">Home Admission</a></h3>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="mega-menu-box">
-                                                                    <div class="mega-menu-img">
-                                                                        <img src="{{ asset('assets/frontend/img/pages/home-courses.jpg') }}" alt="Home Three">
-                                                                        <div class="btn-wrap">
-                                                                            <a href="home-courses.html" class="th-btn">Multipage</a>
-                                                                            <a href="home-courses-op.html" class="th-btn">Onepage</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <h3 class="mega-menu-title"><a href="home-courses.html">Home Courses</a>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="{{ url('/') }}">{{ __('navigation.home') }}</a></li>
+                                        <li><a href="{{ url('/about-us') }}">About Us</a></li>
                                         <li class="menu-item-has-children">
                                             <a href="#">Programs</a>
                                             <ul class="sub-menu">

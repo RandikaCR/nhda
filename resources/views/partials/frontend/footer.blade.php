@@ -8,11 +8,11 @@
                             <h3 class="widget_title">About Stadum</h3>
                             <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
                             <div class="footer-info">
-                                <a href="#">
-                                    <span class="footer-info-icon"><i class="fa-solid fa-location-dot"></i></span> 45 New Eskaton Road, Austria
+                                <a href="tel:+94112431722">
+                                    <span class="footer-info-icon"><i class="fa-solid fa-phone"></i></span> +94 11-2431722
                                 </a>
-                                <a href="mailto:infomail@example.com">
-                                    <span class="footer-info-icon"><i class="fa-solid fa-envelope"></i></span> infomail@example.com
+                                <a href="mailto:nhdaemp@gmail.com">
+                                    <span class="footer-info-icon"><i class="fa-solid fa-envelope"></i></span> nhdaemp@gmail.com
                                 </a>
                             </div>
                         </div>
