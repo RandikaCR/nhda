@@ -19,6 +19,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //Admin
+        if ( request()->segment(1) == 'admin' ){
+
+            view()->composer('*', function ($view) {
+                // Get Reservations Count
+                /*$oc = new OrdersHelper();
+                $oc = $oc->getPendingOrdersCount();
+                $reservationsCount = $oc['count'];*/
+                $reservationsCount = 88;
+                view()->share('navReservationsCount', $reservationsCount);
+
+
+            });
+
+
+        }
     }
 }

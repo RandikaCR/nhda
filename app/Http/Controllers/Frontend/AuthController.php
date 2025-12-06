@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -10,23 +11,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class AuthController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
+    public function signIn(Request $request)
     {
+        if (Auth::check()){
+            return redirect()->back();
+        }
         return view('auth.sign-in');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
+    public function login(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('frontend.homepage', absolute: false));
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -41,13 +46,14 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'uuid' => $uuId,
-            'user_role_id' => $request->user_role_id,
+            'user_role_id' => 4,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'email' => $request->email,
             'password' => Hash::make($request->password),
+            'email' => $request->email,
             'image' => 'default-user.png',
             'status' => 1,
+            'is_deleted' => 0,
         ]);
 
         event(new Registered($user));
@@ -55,5 +61,15 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('frontend.homepage', absolute: false));
+    }
+
+    public function appLogout(Request $request){
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        $out = ['status' => 'success'];
+        return response()->json($out);
     }
 }

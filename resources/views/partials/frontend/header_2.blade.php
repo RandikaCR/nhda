@@ -171,11 +171,10 @@
             </ul>
         </div>
     </div>
-</div>
-<!--==============================
-Header Area
+</div><!--==============================
+    Header Area
 ==============================-->
-<header class="th-header header-layout1">
+<header class="th-header header-layout2">
     <div class="header-top">
         <div class="container th-container4">
             <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
@@ -204,35 +203,35 @@ Header Area
                             <li>
                                 <div class="dropdown-link">
                                     @if(Session::get('locale') == 'en')
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">English </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                                        <li>
-                                            <a href="{{ url('set-localization/si') }}">සිංහල</a>
-                                            <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
-                                        </li>
-                                    @elseif(Session::get('locale') == 'si')
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">සිංහල </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                                        <li>
-                                            <a href="{{ url('set-localization/en') }}">English</a>
-                                            <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
-                                        </li>
-                                    @elseif(Session::get('locale') == 'ta')
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">தமிழ் </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                                        <li>
-                                            <a href="{{ url('set-localization/en') }}">English</a>
-                                            <a href="{{ url('set-localization/si') }}">සිංහල</a>
-                                        </li>
-                                    @else
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">English </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                                            <li>
+                                            <li class="w-100 me-0 mb-1">
                                                 <a href="{{ url('set-localization/si') }}">සිංහල</a>
                                                 <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
                                             </li>
-                                    @endif
-                                    </ul>
+                                            @elseif(Session::get('locale') == 'si')
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">සිංහල </a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                                    <li class="w-100 me-0 mb-1">
+                                                        <a href="{{ url('set-localization/en') }}">English</a>
+                                                        <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
+                                                    </li>
+                                                    @elseif(Session::get('locale') == 'ta')
+                                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">தமிழ் </a>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                                            <li class="w-100 me-0 mb-1">
+                                                                <a href="{{ url('set-localization/en') }}">English</a>
+                                                                <a href="{{ url('set-localization/si') }}">සිංහල</a>
+                                                            </li>
+                                                            @else
+                                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">English </a>
+                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                                                    <li class="w-100 me-0 mb-1">
+                                                                        <a href="{{ url('set-localization/si') }}">සිංහල</a>
+                                                                        <a href="{{ url('set-localization/ta') }}">தமிழ்</a>
+                                                                    </li>
+                                                                    @endif
+                                                                </ul>
                                 </div>
                             </li>
                         </ul>
@@ -241,109 +240,66 @@ Header Area
             </div>
         </div>
     </div>
-    <div class="header-info d-none d-sm-block">
-        <div class="container th-container2">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-auto">
-                    <div class="header-logo">
-                        <a href="{{ url('/') }}">
-                            <img src="{{ asset('assets/common/images/nhda-logo_1.png') }}" alt="NHDA">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <div class="header-info-right">
-                        <div class="header-info-item">
-                            <div class="header-info-icon">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div class="header-info-content">
-                                <span class="header-info-text">Email</span>
-                                <h3 class="header-info-title">
-                                    <a href="mailto:nhdaemp@gmail.com">nhdaemp@gmail.com</a>
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="header-info-item">
-                            <div class="header-info-icon">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div class="header-info-content">
-                                <span class="header-info-text">Phone Number</span>
-                                <h3 class="header-info-title">
-                                    <a href="tel:+94112431722">+94 11-2431722</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="sticky-wrapper">
         <!-- Main Menu Area -->
         <div class="menu-area">
-            <div class="container th-container2">
-                <div class="menu-wrapp">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-auto">
-                            <div class="header-left d-flex align-items-center">
-                                <div class="header-logo d-block d-sm-none">
-                                    <a href="{{ url('/') }}">
-                                        <img src="{{ asset('assets/common/images/nhda-logo-dark-header.png') }}" alt="NHDA">
-                                    </a>
-                                </div>
-                                <div class="header-button d-none d-sm-block">
-                                </div>
-                                <nav class="main-menu d-none d-xl-block">
-                                    <ul>
-                                        <li><a href="{{ url('/') }}">{{ __('lang.home') }}</a></li>
-                                        <li><a href="{{ url('/about-us') }}">{{ __('lang.about_us') }}</a></li>
-                                        <li><a href="{{ url('/projects-and-programmes') }}">{{ __('lang.projects_and_programmes') }}</a></li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">{{ __('lang.news_and_events') }}</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="{{ url('/news-and-events') }}">{{ __('lang.news_and_events') }}</a></li>
-                                                <li><a href="{{ url('/press-releases') }}">{{ __('lang.press_releases') }}</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">{{ __('lang.services') }}</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="{{ url('/news-and-events') }}">{{ __('lang.services') }}</a></li>
-                                                <li><a href="{{ url('/services-functions') }}">{{ __('lang.services_functions') }}</a></li>
-                                                <li><a href="{{ url('/circuit-bungalows') }}">{{ __('lang.circuit_bungalows') }}</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">{{ __('lang.downloads') }}</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">{{ __('lang.contact_us') }}</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="{{ url('/contact-head-office') }}">{{ __('lang.head_office') }}</a></li>
-                                                <li><a href="{{ url('/board-of-directors') }}">{{ __('lang.board_of_directors') }}</a></li>
-                                                <li><a href="{{ url('/contact-senior-staff') }}">{{ __('lang.senior_staff_contacts') }}</a></li>
-                                                <li><a href="{{ url('/contact-district-offices') }}">{{ __('lang.district_office_contacts') }}</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+            <div class="container th-container4">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto">
+                        <div class="header-logo">
+                            <a href="{{ url('/') }}">
+                                <img src="{{ asset('assets/common/images/nhda-logo.png') }}" alt="NHDA">
+                            </a>
                         </div>
-                        <div class="col-auto ms-lg-auto">
-                            <div class="header-right me-2">
-                                <button class="header-search searchBoxToggler">
-                                    <i class="fa-regular fa-magnifying-glass"></i>
-                                </button>
-                                <button type="button" class="th-menu-toggle d-inline-block d-xl-none"><i class="far fa-bars"></i></button>
-                            </div>
+                    </div>
+                    <div class="col-auto d-none d-xl-block">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="{{ url('/') }}">{{ __('lang.home') }}</a></li>
+                                <li><a href="{{ url('/about-us') }}">{{ __('lang.about_us') }}</a></li>
+                                <li><a href="{{ url('/projects-and-programmes') }}">{{ __('lang.projects_and_programmes') }}</a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">{{ __('lang.news_and_events') }}</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ url('/news-and-events') }}">{{ __('lang.news_and_events') }}</a></li>
+                                        <li><a href="{{ url('/press-releases') }}">{{ __('lang.press_releases') }}</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">{{ __('lang.services') }}</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ url('/news-and-events') }}">{{ __('lang.services') }}</a></li>
+                                        <li><a href="{{ url('/services-functions') }}">{{ __('lang.services_functions') }}</a></li>
+                                        <li><a href="{{ url('/circuit-bungalows') }}">{{ __('lang.circuit_bungalows') }}</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">{{ __('lang.downloads') }}</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
+                                        <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
+                                        <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
+                                        <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">{{ __('lang.contact_us') }}</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ url('/contact-head-office') }}">{{ __('lang.head_office') }}</a></li>
+                                        <li><a href="{{ url('/board-of-directors') }}">{{ __('lang.board_of_directors') }}</a></li>
+                                        <li><a href="{{ url('/contact-senior-staff') }}">{{ __('lang.senior_staff_contacts') }}</a></li>
+                                        <li><a href="{{ url('/contact-district-offices') }}">{{ __('lang.district_office_contacts') }}</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-auto">
+                        <div class="header-right">
+                            <button class="header-search searchBoxToggler">
+                                <i class="fa-regular fa-magnifying-glass"></i>
+                            </button>
+                            <button type="button" class="th-menu-toggle d-inline-block d-xl-none"><i class="far fa-bars"></i></button>
                         </div>
                     </div>
                 </div>

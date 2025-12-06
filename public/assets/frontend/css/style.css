@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
-Template Name: Stadum 
+Template Name: Stadum
 Template URL: https://themeholy.com/html/Stadum/
 Description: Education WordPress HTML Template
 Author: themeholy
@@ -34,7 +34,7 @@ Version: 1.0.0
     3.8. Text Color
     3.9. Overlay
     3.10. Animation
-    
+
 04. Template Style
     4.1. Widget
     4.2. Header
@@ -44,7 +44,7 @@ Version: 1.0.0
     4.6. Blog
     4.7. Comments
     4.8. Hero Area
-    4.9. Error    
+    4.9. Error
     4.00. Popup Search
     4.00. Popup Side Menu
     4.00. Wocommerce
@@ -3321,52 +3321,64 @@ textarea.is-invalid {
 
 @-webkit-keyframes greentopBubbles {
   0% {
-    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+ 40% 90%, 55% 90%, 70% 90%;
   }
   50% {
-    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+ 50% 50%, 65% 20%, 90% 30%;
   }
   100% {
-    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+ 50% 40%, 65% 10%, 90% 20%;
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
 
 @keyframes greentopBubbles {
   0% {
-    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+ 40% 90%, 55% 90%, 70% 90%;
   }
   50% {
-    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+ 50% 50%, 65% 20%, 90% 30%;
   }
   100% {
-    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+ 50% 40%, 65% 10%, 90% 20%;
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
 
 @-webkit-keyframes greenbottomBubbles {
   0% {
-    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+ 70% -10%, 70% 0%;
   }
   50% {
-    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+ 105% 0%;
   }
   100% {
-    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+ 110% 10%;
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
 
 @keyframes greenbottomBubbles {
   0% {
-    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+ 70% -10%, 70% 0%;
   }
   50% {
-    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+ 105% 0%;
   }
   100% {
-    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+ 110% 10%;
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
@@ -8765,13 +8777,13 @@ te .footer-widget .widget_title:before {
 }
 
 .header-logo {
-  padding: 16px 0;
+  padding: 0;
 }
 
 .main-menu a {
   position: relative;
   display: block;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.02em;
   font-family: var(--body-font);
@@ -9342,7 +9354,7 @@ te .footer-widget .widget_title:before {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  min-width: auto;
+  min-width: 150px;
   top: calc(100% + 14px) !important;
   left: 50% !important;
   -webkit-transform: translateX(-50%) !important;
@@ -9844,13 +9856,13 @@ te .footer-widget .widget_title:before {
 }
 
 .header-layout1 .main-menu > ul > li > a {
-  padding: 19px 0;
+  padding: 15px 0;
   /* Medium Large devices */
 }
 
 @media (max-width: 1399px) {
   .header-layout1 .main-menu > ul > li > a {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -10146,21 +10158,21 @@ te .footer-widget .widget_title:before {
 }
 
 @media (max-width: 1600px) {
-  .header-layout2 .main-menu ul li {
+  /*.header-layout2 .main-menu ul li {
     margin: 0 8px;
-  }
+  }*/
 }
 
 @media (max-width: 1500px) {
-  .header-layout2 .main-menu ul li {
+  /*.header-layout2 .main-menu ul li {
     margin: 0 14px;
-  }
+  }*/
 }
 
 @media (max-width: 1299px) {
-  .header-layout2 .main-menu ul li {
+  /*.header-layout2 .main-menu ul li {
     margin: 0 5px;
-  }
+  }*/
 }
 
 .header-layout2 .main-menu ul li:has(.sub-menu) > a:after,
@@ -10311,7 +10323,8 @@ te .footer-widget .widget_title:before {
   }
 }
 
-.header-layout2 .header-search {
+.header-layout2 .header-search,
+.header-layout1 .header-search{
   width: 56px;
   height: 56px;
   line-height: 56px;
@@ -10323,7 +10336,8 @@ te .footer-widget .widget_title:before {
 }
 
 @media (max-width: 375px) {
-  .header-layout2 .header-search {
+  .header-layout2 .header-search,
+  .header-layout1 .header-search {
     width: 50px;
     height: 50px;
     line-height: 50px;
@@ -10331,7 +10345,8 @@ te .footer-widget .widget_title:before {
   }
 }
 
-.header-layout2 .header-search:hover {
+.header-layout2 .header-search:hover,
+.header-layout1 .header-search:hover{
   color: var(--white-color);
   background-color: var(--theme-color);
   border: 1px solid var(--theme-color);

@@ -57,7 +57,7 @@
 
                     setTimeout(function() {
                         $.ajax({
-                            url: "{{ route('frontend.appLogout') }}",
+                            url: "{{ route('frontend.auth.appLogout') }}",
                             type: 'POST',
                             data: {
                                 _token: csrf_token()

@@ -14,11 +14,13 @@ abstract class Controller
     public $locale = null;
 
     public function __construct(Request $request){
-        /*if ( !empty(Session::get('lang')) ){
-            $this->locale = Session::get('lang');
-        }*/
+        if ( !empty(Session::get('locale')) ){
+            $this->locale = Session::get('locale');
+        }else{
+            $this->locale = App::currentLocale();
+        }
 
-        $this->locale = App::currentLocale();
+        // $this->locale = App::currentLocale();
 
         if (!empty(Auth::user()) && !empty(Auth::user()->id)){
             $this->userId = Auth::user()->id;
@@ -50,8 +52,9 @@ abstract class Controller
         }
 
         $string = strtolower($string);
+        $slug = trim(trim($string, $separator)) . '-' . time();
 
-        return trim(trim($string, $separator));
+        return $slug;
     }
 
 
@@ -92,13 +95,13 @@ abstract class Controller
         $image_array_2 = explode(",", $image_array_1[1]);
         $data = base64_decode($image_array_2[1]);
         $image_name = time() . '_temp.png';
-        $upload_path = public_path('assets/common/images/' . $image_name);
+        $upload_path = public_path('assets/common/images/uploads/' . $image_name);
         file_put_contents($upload_path, $data);
 
         if ( file_exists($upload_path)) {
 
             $file_name = time() . '.jpg';
-            $file_name_with_path = public_path('assets/common/images/' . $file_name);
+            $file_name_with_path = public_path('assets/common/images/uploads/' . $file_name);
             $image = imagecreatefrompng($upload_path);
             imagejpeg($image, $file_name_with_path, 90);
             imagedestroy($image);

@@ -12,4 +12,30 @@ class News extends Model
     const UPDATED_AT = 'updated_at';
 
     protected $table = 'news';
+
+    public function images()
+    {
+        return $this->hasMany(NewsImages::class, 'news_id', 'id');
+    }
+
+    public function primary_image()
+    {
+        return $this->hasOne(NewsImages::class, 'news_id', 'id');
+    }
+
+    public function status(){
+
+        $status = 'Inactive';
+        $statusClass = 'bg-warning';
+
+        if ($this->status == 1){
+            $status = 'Active';
+            $statusClass = 'bg-success';
+        }
+
+        return (Object)[
+            'text' => $status,
+            'class' => $statusClass,
+        ];
+    }
 }

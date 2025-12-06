@@ -6,7 +6,7 @@
                     <div class="widget footer-widget">
                         <div class="th-widget-about">
                             <h3 class="widget_title">About Stadum</h3>
-                            <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable. </p>
+                            <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable.</p>
                             <div class="footer-info">
                                 <a href="tel:+94112431722">
                                     <span class="footer-info-icon"><i class="fa-solid fa-phone"></i></span> +94 11-2431722

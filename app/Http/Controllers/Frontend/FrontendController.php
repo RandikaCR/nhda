@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
     public function index(Request $request)
     {
-        // dd(Session::get('locale') .' - '. App::currentLocale());
         return view('frontend.index');
     }
 

@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
-<title>@yield('page_title')</title>
+<title>@yield('page_title') :: NHDA Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta content="MDRT MCC Admin" name="description" />
+<meta content="NHDA Admin" name="description" />
 <meta content="Randika De Alwis" name="author" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- App favicon -->

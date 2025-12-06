@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 //FRONTEND CONTROLLERS
+use App\Http\Controllers\Frontend\AuthController AS FrontendAuth;
 use App\Http\Controllers\Frontend\FrontendController AS Frontend;
 
 //BACKEND CONTROLLERS
@@ -14,15 +15,22 @@ use App\Http\Controllers\Backend\DashboardController AS BackendDashboard;
 // L
 use App\Http\Controllers\Backend\LocalizationsController AS BackendLocalizations;
 
+// N
+use App\Http\Controllers\Backend\NewsController AS BackendNews;
+
 
 //1 - Frontend Routes
 Route::group([ 'prefix' =>'/', 'middleware' => ['setLocale']], function () {
 
     Route::get('/', [Frontend::class, 'index'])->name('frontend.homepage');
 
-
     Route::get('/set-localization/{lang}', [Frontend::class, 'localization'])->name('frontend.localization');
-    Route::post('/app-logout', [Frontend::class, 'appLogout'])->name('frontend.appLogout');
+
+
+    Route::get('/sign-in', [FrontendAuth::class, 'signIn'])->name('frontend.auth.signIn');
+    Route::post('/sign-in/create', [FrontendAuth::class, 'login'])->name('frontend.auth.login');
+    Route::post('/sign-up/create', [FrontendAuth::class, 'store'])->name('frontend.auth.store');
+    Route::post('/app-logout', [FrontendAuth::class, 'appLogout'])->name('frontend.auth.appLogout');
 
 
 });
@@ -40,11 +48,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [BackendDashboard::class, 'index'])->name('backend.dashboard');
 
 
-        // S
+        // L
         Route::get('/localizations', [BackendLocalizations::class, 'index'])->name('backend.localizations.index');
         Route::get('/localizations/create', [BackendLocalizations::class, 'create'])->name('backend.localizations.create');
-        Route::get('/localizations/edit/{id}', [BackendLocalizations::class, 'edit'])->name('backend.localizations.edit');
+        Route::get('/localizations/edit/{slug}', [BackendLocalizations::class, 'edit'])->name('backend.localizations.edit');
         Route::post('/localizations/store', [BackendLocalizations::class, 'store'])->name('backend.localizations.store');
+
+
+        // N
+        Route::get('/news', [BackendNews::class, 'index'])->name('backend.news.index');
+        Route::get('/news/create', [BackendNews::class, 'create'])->name('backend.news.create');
+        Route::get('/news/edit/{slug}', [BackendNews::class, 'edit'])->name('backend.news.edit');
+        Route::post('/news/store', [BackendNews::class, 'store'])->name('backend.news.store');
+        Route::post('/news/delete', [BackendNews::class, 'delete'])->name('backend.news.delete');
+        Route::post('/news/slug-generator', [BackendNews::class, 'slugGenerator'])->name('backend.news.slugGenerator');
+        Route::post('/news/upload-image', [BackendNews::class, 'imageUpload'])->name('backend.news.imageUpload');
+        Route::post('/news/set-primary-image', [BackendNews::class, 'setPrimaryImage'])->name('backend.news.setPrimaryImage');
+        Route::post('/news/image-delete', [BackendNews::class, 'deleteImage'])->name('backend.news.deleteImage');
+
 
 
 
@@ -52,7 +73,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     //3 - Reservations Manager Routes
-    Route::group([ 'prefix' =>'res', 'middleware' => ['isReservationsManager']], function () {
+    Route::group([ 'prefix' =>'reservations', 'middleware' => ['isReservationsManager']], function () {
 //        dd('isReservationsManager');
         // D
         Route::get('/', [BackendDashboard::class, 'index'])->name('backend.dashboard');
