@@ -5,7 +5,7 @@
 <meta content="Randika De Alwis" name="author" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- App favicon -->
-<link rel="icon" href="{{ asset('assets/common/images/logo-2.png') }}" type="image/png"/>
+<link rel="icon" href="{{ asset('assets/common/images/logo.png') }}" type="image/png"/>
 
 @yield('styles')
 

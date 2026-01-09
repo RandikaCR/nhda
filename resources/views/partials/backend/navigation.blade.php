@@ -219,7 +219,7 @@
 
                 <li class="menu-title"><span data-key="t-system">Settings</span></li>
 
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarDownloadCategories" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'download-categories') ? 'true' : 'false' }}" aria-controls="sidebarDownloadCategories">
                         <i class="mdi mdi-gift"></i> <span data-key="t-raffles-main">Download Categories</span>
                     </a>
@@ -233,6 +233,18 @@
                             </li>
                         </ul>
                     </div>
+                </li>--}}
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ (request()->segment(2) == 'download-categories') ? 'active' : '' }}" href="{{ url('/admin/download-categories') }}">
+                        <i class="mdi mdi-account-details"></i> <span data-key="t-download-categories">Download Categories</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ (request()->segment(2) == 'screens') ? 'active' : '' }}" href="{{ url('/admin/screens') }}">
+                        <i class="mdi mdi-account-details"></i> <span data-key="t-screens">Screens</span>
+                    </a>
                 </li>
 
                 <li class="nav-item">

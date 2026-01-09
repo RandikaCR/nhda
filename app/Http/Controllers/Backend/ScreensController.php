@@ -3,20 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\DownloadCategories;
+use App\Models\Screens;
+use App\Models\UserScreens;
 use Illuminate\Http\Request;
 
-class DownloadCategoriesController extends Controller
+class ScreensController extends Controller
 {
-    private $screenPrefix = 'download_categories';
+    private $screenPrefix = 'screens';
 
     public function index()
     {
         $validateArr = ['screen_prefix' => $this->screenPrefix];
         $isScreenAccess = $this->validateScreenAccess($validateArr);
 
-        $items = DownloadCategories::orderBy('id', 'ASC')->get();
-        return view('backend.download-categories.index',[
+        $items = Screens::orderBy('screen', 'ASC')->get();
+        return view('backend.screens.index',[
             'items' => $items,
             'is_screen_access' => $isScreenAccess
         ]);
@@ -29,7 +30,7 @@ class DownloadCategoriesController extends Controller
 
 
         if (!empty($id)){
-            $get = DownloadCategories::find($id);
+            $get = Screens::find($id);
             $status = 'success';
 
         }else{
@@ -40,8 +41,8 @@ class DownloadCategoriesController extends Controller
         $out = [
             'status' => $status,
             'id' => $id,
-            'slug' => $get->slug,
-            'download_category' => $get->download_category,
+            'screen' => $get->screen,
+            'screen_prefix' => $get->screen_prefix,
         ];
         return response()->json($out);
 
@@ -60,29 +61,28 @@ class DownloadCategoriesController extends Controller
         if ($validator){
 
             if (!empty($id)){
-                $save = DownloadCategories::find($id);
+                $save = Screens::find($id);
             }
             else{
-                $treq = ['screen' => 'download_categories', 'id' => ''];
+                $treq = ['screen' => 'screens', 'id' => ''];
                 $uuId = $this->generateUUId($treq);
 
-                $save = New DownloadCategories();
+                $save = New Screens();
                 $save->uuid = $uuId;
                 $save->status = 1;
             }
 
-
-            $save->slug = !empty($req['slug']) ? $req['slug'] : null;
-            $save->download_category = !empty($req['download_category']) ? $req['download_category'] : null;
+            $save->screen = $req['screen'];
+            $save->screen_prefix = !empty($req['screen_prefix']) ? $req['screen_prefix'] : null;
             $save->save();
             $status = 'success';
             $messageTitle = 'Success';
-            $messageText = 'Download Category saved';
+            $messageText = 'Screen saved';
         }else{
 
             $status = 'error';
             $messageTitle = 'Error!';
-            $messageText = 'Download Category exist!';
+            $messageText = 'Screen exist!';
         }
 
 
@@ -114,7 +114,7 @@ class DownloadCategoriesController extends Controller
         $class = '';
 
         if (!empty($id)){
-            $get = DownloadCategories::find($id);
+            $get = Screens::find($id);
 
             if ($get->status == 1){
                 $get->status = 0;
@@ -123,7 +123,7 @@ class DownloadCategoriesController extends Controller
             }
             $get->save();
             $status = 'success';
-            $get = DownloadCategories::find($id);
+            $get = Screens::find($id);
             $getStatus = $this->categoryStatus($get->status);
             $text = $getStatus->text;
             $class = $getStatus->class;
@@ -147,11 +147,11 @@ class DownloadCategoriesController extends Controller
         $status = 'success';
         $isExist = 0;
         $id = $request->id;
-        $slug = $this->generateSeoURL($request->category, 1);
+        $slug = $this->generateSeoURL($request->title, 1);
 
-        $getCount = DownloadCategories::where('slug', $slug)->count();
+        $getCount = Screens::where('slug', $slug)->count();
         if ($getCount > 0){
-            $item = DownloadCategories::where('id', $id)->first();
+            $item = Screens::where('id', $id)->first();
             if (!empty($item)){
                 if ($item->slug != $slug){
                     $isExist = 1;

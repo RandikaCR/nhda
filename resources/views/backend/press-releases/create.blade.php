@@ -1,10 +1,10 @@
 @extends('layouts.backend')
 
 @section('page_title')
-    News
+    Press Release
 
-    @if(isset($news))
-        #{{ $news->id }}
+    @if(isset($press))
+        #{{ $press->id }}
     @endif
 @endsection
 
@@ -51,9 +51,9 @@
 @section('header_buttons')
     <div class="row">
         <div class="col-sm-12 d-flex justify-content-end mb-3">
-            <a href="{{ url('admin/news') }}" class="btn btn-primary">
+            <a href="{{ url('admin/press-releases') }}" class="btn btn-primary">
                 <span class="mdi mdi-format-list-bulleted-square me-2"></span>
-                All News
+                All Press Releases
             </a>
         </div>
     </div>
@@ -75,33 +75,33 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('backend.news.store') }}">
+        <form method="POST" action="{{ route('backend.pressReleases.store') }}">
             @csrf
-            <input type="hidden" name="id" value="{{ isset($news) ? $news->id : '' }}">
+            <input type="hidden" name="id" value="{{ isset($press) ? $press->id : '' }}">
             <input type="hidden" id="temp_id" name="temp_id" value="{{ $temp_id }}">
             <div class="row">
                 <div class="col-sm-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">News Details</h4>
+                            <h4 class="card-title">Press Release Details</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 mb-4">
                                     <label>Slug</label>
-                                    <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter here...." value="{{ isset($news) ? $news->slug : '' }}" readonly>
+                                    <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter here...." value="{{ isset($press) ? $press->slug : '' }}" readonly>
                                     <label class="text-danger fw-bold mt-1 d-none" id="slug-warning">Slug already exists!</label>
                                 </div>
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Title (ENGLISH) *</label>
-                                    <input class="form-control" type="text" id="main-title" name="en_title" placeholder="Enter here...." value="{{ isset($news) ? $news->en_title : '' }}">
+                                    <input class="form-control" type="text" id="main-title" name="en_title" placeholder="Enter here...." value="{{ isset($press) ? $press->en_title : '' }}">
                                 </div>
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Content (ENGLISH)</label>
                                     <textarea id="content-en" name="en_content">
-                                    {{ isset($news) ? $news->en_content : '' }}
+                                    {{ isset($press) ? $press->en_content : '' }}
                                 </textarea>
                                 </div>
 
@@ -109,13 +109,13 @@
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Title (SINHALA)</label>
-                                    <input class="form-control" type="text" id="title-si" name="si_title" placeholder="Enter here...." value="{{ isset($news) ? $news->si_title : '' }}">
+                                    <input class="form-control" type="text" id="title-si" name="si_title" placeholder="Enter here...." value="{{ isset($press) ? $press->si_title : '' }}">
                                 </div>
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Content (SINHALA)</label>
                                     <textarea id="content-si" name="si_content">
-                                    {{ isset($news) ? $news->si_content : '' }}
+                                    {{ isset($press) ? $press->si_content : '' }}
                                 </textarea>
                                 </div>
 
@@ -123,13 +123,13 @@
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Title (TAMIL)</label>
-                                    <input class="form-control" type="text" id="title-ta" name="ta_title" placeholder="Enter here...." value="{{ isset($news) ? $news->ta_title : '' }}">
+                                    <input class="form-control" type="text" id="title-ta" name="ta_title" placeholder="Enter here...." value="{{ isset($press) ? $press->ta_title : '' }}">
                                 </div>
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Content (TAMIL)</label>
                                     <textarea id="content-ta" name="ta_content">
-                                    {{ isset($news) ? $news->ta_content : '' }}
+                                    {{ isset($press) ? $press->ta_content : '' }}
                                 </textarea>
                                 </div>
 
@@ -362,7 +362,7 @@
                 });
 
                 $.ajax({
-                    url: "{{ route('backend.news.imageUpload') }}",
+                    url: "{{ route('backend.pressReleases.imageUpload') }}",
                     type: "POST",
                     data: {
                         image:response,
@@ -387,7 +387,7 @@
 
             if(!$isSending){
                 $.ajax({
-                    url: "{{ route('backend.news.slugGenerator') }}",
+                    url: "{{ route('backend.pressReleases.slugGenerator') }}",
                     dataType: 'json',
                     data: {
                         id: $id,
@@ -460,7 +460,7 @@
 
                         setTimeout(function() {
                             $.ajax({
-                                url: "{{ route('backend.news.deleteImage') }}",
+                                url: "{{ route('backend.pressReleases.deleteImage') }}",
                                 type: 'POST',
                                 data: {
                                     id: $id,
@@ -517,7 +517,7 @@
 
                         setTimeout(function() {
                             $.ajax({
-                                url: "{{ route('backend.news.setPrimaryImage') }}",
+                                url: "{{ route('backend.pressReleases.setPrimaryImage') }}",
                                 type: 'POST',
                                 data: {
                                     id: $id,

@@ -9,13 +9,11 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    private $screenPrefix = 'news';
+
     public function index(Request $request){
 
-        $products = [];
-
         $keyword = !empty($request->keyword) ? $request->keyword : null;
-        $genderCategoryId = !empty($request->gender_category_id) ? $request->gender_category_id : null;
-        $status = isset($request->status) ? $request->status : 'all';
 
         $news = News::select(
             'news.*',
@@ -36,10 +34,13 @@ class NewsController extends Controller
             ->paginate(20)
             ->withQueryString();
 
+        $validateArr = ['screen_prefix' => $this->screenPrefix];
+        $isScreenAccess = $this->validateScreenAccess($validateArr);
 
         return view('backend.news.index', [
             'all_news' => $news,
             'keyword' => $keyword,
+            'is_screen_access' => $isScreenAccess
         ]);
 
     }
@@ -49,9 +50,13 @@ class NewsController extends Controller
         $tempId = $this->getTempNewsId($request);
         $images = NewsImages::where('news_id', $tempId)->get();
 
+        $validateArr = ['screen_prefix' => $this->screenPrefix];
+        $isScreenAccess = $this->validateScreenAccess($validateArr);
+
         return view('backend.news.create',[
             'temp_id' => $tempId,
             'images' => $images,
+            'is_screen_access' => $isScreenAccess
         ]);
     }
 
@@ -62,10 +67,14 @@ class NewsController extends Controller
         $tempId = $news->id;
         $images = NewsImages::where('news_id', $tempId)->get();
 
+        $validateArr = ['screen_prefix' => $this->screenPrefix];
+        $isScreenAccess = $this->validateScreenAccess($validateArr);
+
         return view('backend.news.create',[
             'temp_id' => $tempId,
             'news' => $news,
             'images' => $images,
+            'is_screen_access' => $isScreenAccess
         ]);
     }
 
@@ -83,7 +92,7 @@ class NewsController extends Controller
         }
         else{
 
-            $req = ['screen' => 'news', 'id' => ''];
+            $req = ['screen' => $this->screenPrefix, 'id' => ''];
             $uuId = $this->generateUUId($req);
 
             $save = new News();
@@ -133,7 +142,6 @@ class NewsController extends Controller
 
     }
 
-
     public function delete(Request $request){
 
         $news = News::find($request->id);
@@ -144,7 +152,6 @@ class NewsController extends Controller
             'id' =>  $request->id,
         ]);
     }
-
 
     public function getTempNewsId(Request $request){
         $rand = rand(10000000,99999999) . time();
@@ -180,14 +187,16 @@ class NewsController extends Controller
             $img = $this->commonImageUpload($request);
             $file_name = $img['file_name'];
             $status = $img['status'];
-            $isPrimary = 0;
+
+            $imgCount = NewsImages::where('news_id', $request->id)->where('is_primary', 1)->count();
+            $isPrimary = empty($imgCount) ? 1 : 0;
 
             $imgId = 0;
             if (!empty($file_name)){
                 $img = new NewsImages();
                 $img->news_id = $request->id;
                 $img->image = $file_name;
-                $img->is_primary = 0;
+                $img->is_primary = $isPrimary;
                 $img->status = 1;
                 $img->save();
 
@@ -204,8 +213,6 @@ class NewsController extends Controller
 
         }
     }
-
-
 
     public function slugGenerator(Request $request){
 
@@ -232,7 +239,6 @@ class NewsController extends Controller
             'slug' =>  $slug,
         ]);
     }
-
 
     public function deleteImage(Request $request){
 

@@ -48,3 +48,41 @@ function getDecimalValue($value, $defaultValue = 0, $decimalPoints = 2) {
     }
     return $defaultValue;
 }
+
+function alertSuccess($message, $title = 'Success'){
+
+    $alert = $('<div></div>').addClass('alert alert-success alert-dismissible alert-label-icon rounded-label shadow fade show mb-xl-0 mt-2').attr('role', 'alert')
+        .append($('<i></i>').addClass('ri-check-double-line label-icon'))
+        .append($('<strong></strong>').addClass('me-1').text($title))
+        .append($('<span></span>').text($message))
+        .append($('<button></button>').addClass('btn-close').attr('type', 'button').attr('data-bs-dismiss', 'alert').attr('aria-label', 'close'));
+
+    return $alert;
+}
+function alertDanger($message, $title = 'Error'){
+
+    $alert = $('<div></div>').addClass('alert alert-danger alert-dismissible alert-label-icon rounded-label shadow fade show mb-xl-0 mt-2').attr('role', 'alert')
+        .append($('<i></i>').addClass('ri-error-warning-line label-icon'))
+        .append($('<strong></strong>').addClass('me-1').text($title))
+        .append($('<span></span>').text($message))
+        .append($('<button></button>').addClass('btn-close').attr('type', 'button').attr('data-bs-dismiss', 'alert').attr('aria-label', 'close'));
+
+    return $alert;
+}
+
+function alertProcessing($message = null, $title = 'Saving...'){
+
+    if ($message == null || $message == ''){
+        $message = '';
+    }
+
+    $alert = $('<div></div>').addClass('alert alert-info alert-dismissible alert-label-icon rounded-label shadow fade show mb-xl-0 mt-2').attr('role', 'alert')
+        .append($('<span></span>').addClass('label-icon')
+            .append($('<i></i>').addClass('ri-refresh-line icon-rotate-right'))
+        )
+        .append($('<strong></strong>').addClass('me-1').text($title))
+        .append($('<span></span>').text($message))
+        .append($('<button></button>').addClass('btn-close').attr('type', 'button').attr('data-bs-dismiss', 'alert').attr('aria-label', 'close'));
+
+    return $alert;
+}

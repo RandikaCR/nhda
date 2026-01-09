@@ -11,12 +11,23 @@ use App\Http\Controllers\Frontend\FrontendController AS Frontend;
 
 // D
 use App\Http\Controllers\Backend\DashboardController AS BackendDashboard;
+use App\Http\Controllers\Backend\DownloadCategoriesController AS BackendDownloadCategories;
 
 // L
 use App\Http\Controllers\Backend\LocalizationsController AS BackendLocalizations;
 
 // N
 use App\Http\Controllers\Backend\NewsController AS BackendNews;
+
+// P
+use App\Http\Controllers\Backend\PressReleasesController AS BackendPressReleases;
+use App\Http\Controllers\Backend\ProjectsController AS BackendProjects;
+
+// S
+use App\Http\Controllers\Backend\ScreensController AS BackendScreens;
+
+// U
+use App\Http\Controllers\Backend\UsersController AS BackendUsers;
 
 
 //1 - Frontend Routes
@@ -47,6 +58,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // D
         Route::get('/', [BackendDashboard::class, 'index'])->name('backend.dashboard');
 
+        Route::get('/download-categories', [BackendDownloadCategories::class, 'index'])->name('backend.downloadCategories.index');
+        Route::post('/download-categories/store', [BackendDownloadCategories::class, 'store'])->name('backend.downloadCategories.store');
+        Route::post('/download-categories/get', [BackendDownloadCategories::class, 'get'])->name('backend.downloadCategories.get');
+        Route::post('/download-categories/status', [BackendDownloadCategories::class, 'status'])->name('backend.downloadCategories.status');
+        Route::post('/download-categories/slug-generator', [BackendDownloadCategories::class, 'slugGenerator'])->name('backend.downloadCategories.slugGenerator');
+
 
         // L
         Route::get('/localizations', [BackendLocalizations::class, 'index'])->name('backend.localizations.index');
@@ -67,7 +84,46 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/news/image-delete', [BackendNews::class, 'deleteImage'])->name('backend.news.deleteImage');
 
 
+        // P
+        Route::get('/press-releases', [BackendPressReleases::class, 'index'])->name('backend.pressReleases.index');
+        Route::get('/press-releases/create', [BackendPressReleases::class, 'create'])->name('backend.pressReleases.create');
+        Route::get('/press-releases/edit/{slug}', [BackendPressReleases::class, 'edit'])->name('backend.pressReleases.edit');
+        Route::post('/press-releases/store', [BackendPressReleases::class, 'store'])->name('backend.pressReleases.store');
+        Route::post('/press-releases/delete', [BackendPressReleases::class, 'delete'])->name('backend.pressReleases.delete');
+        Route::post('/press-releases/slug-generator', [BackendPressReleases::class, 'slugGenerator'])->name('backend.pressReleases.slugGenerator');
+        Route::post('/press-releases/upload-image', [BackendPressReleases::class, 'imageUpload'])->name('backend.pressReleases.imageUpload');
+        Route::post('/press-releases/set-primary-image', [BackendPressReleases::class, 'setPrimaryImage'])->name('backend.pressReleases.setPrimaryImage');
+        Route::post('/press-releases/image-delete', [BackendPressReleases::class, 'deleteImage'])->name('backend.pressReleases.deleteImage');
 
+
+        Route::get('/projects', [BackendProjects::class, 'index'])->name('backend.projects.index');
+        Route::get('/projects/create', [BackendProjects::class, 'create'])->name('backend.projects.create');
+        Route::get('/projects/edit/{slug}', [BackendProjects::class, 'edit'])->name('backend.projects.edit');
+        Route::post('/projects/store', [BackendProjects::class, 'store'])->name('backend.projects.store');
+        Route::post('/projects/delete', [BackendProjects::class, 'delete'])->name('backend.projects.delete');
+        Route::post('/projects/slug-generator', [BackendProjects::class, 'slugGenerator'])->name('backend.projects.slugGenerator');
+        Route::post('/projects/upload-image', [BackendProjects::class, 'imageUpload'])->name('backend.projects.imageUpload');
+        Route::post('/projects/set-primary-image', [BackendProjects::class, 'setPrimaryImage'])->name('backend.projects.setPrimaryImage');
+        Route::post('/projects/image-delete', [BackendProjects::class, 'deleteImage'])->name('backend.projects.deleteImage');
+
+
+        // S
+
+        Route::get('/screens', [BackendScreens::class, 'index'])->name('backend.screens.index');
+        Route::post('/screens/store', [BackendScreens::class, 'store'])->name('backend.screens.store');
+        Route::post('/screens/get', [BackendScreens::class, 'get'])->name('backend.screens.get');
+        Route::post('/screens/status', [BackendScreens::class, 'status'])->name('backend.screens.status');
+        Route::post('/screens/slug-generator', [BackendScreens::class, 'slugGenerator'])->name('backend.screens.slugGenerator');
+
+
+        // U
+        Route::get('/users', [BackendUsers::class, 'index'])->name('backend.users.index');
+        Route::get('/users/create', [BackendUsers::class, 'create'])->name('backend.users.create');
+        Route::get('/users/edit/{slug}', [BackendUsers::class, 'edit'])->name('backend.users.edit');
+        Route::get('/users/screens/{slug}', [BackendUsers::class, 'screens'])->name('backend.users.screens');
+        Route::post('/users/store', [BackendUsers::class, 'store'])->name('backend.users.store');
+        Route::post('/users/delete', [BackendUsers::class, 'delete'])->name('backend.users.delete');
+        Route::post('/users/user-screen/set', [BackendUsers::class, 'setUserScreen'])->name('backend.users.setUserScreen');
 
     });
 

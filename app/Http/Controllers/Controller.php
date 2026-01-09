@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Screens;
 use App\Models\User;
+use App\Models\UserScreens;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +13,10 @@ use Illuminate\Support\Facades\Session;
 abstract class Controller
 {
     public $userId = null;
+    public $userRoleId = null;
     public $locale = null;
+    public $superAdminRoleIds = [1];
+    public $adminRoleIds = [1, 2];
 
     public function __construct(Request $request){
         if ( !empty(Session::get('locale')) ){
@@ -24,12 +29,13 @@ abstract class Controller
 
         if (!empty(Auth::user()) && !empty(Auth::user()->id)){
             $this->userId = Auth::user()->id;
+            $this->userRoleId = Auth::user()->user_role_id;
         }
 
     }
 
 
-    public function generateSeoURL($string, $wordLimit = 0){
+    public function generateSeoURL($string, $withoutTimestamp = 0, $wordLimit = 0){
         $separator = '-';
 
         if($wordLimit != 0){
@@ -52,7 +58,12 @@ abstract class Controller
         }
 
         $string = strtolower($string);
-        $slug = trim(trim($string, $separator)) . '-' . time();
+
+        if (!empty($withoutTimestamp)){
+            $slug = trim(trim($string, $separator));
+        }else{
+            $slug = trim(trim($string, $separator)) . '-' . time();
+        }
 
         return $slug;
     }
@@ -115,5 +126,55 @@ abstract class Controller
             'file_name' => $file_name,
         ];
         return $out;
+    }
+
+    public function categoryStatus($getStatus){
+
+        $status = 'Inactive';
+        $statusClass = 'bg-warning';
+
+        if ($getStatus == 1){
+            $status = 'Active';
+            $statusClass = 'bg-success';
+        }
+
+        return (Object)[
+            'text' => $status,
+            'class' => $statusClass,
+        ];
+    }
+
+
+    public function validateScreenAccess($req){
+        $isAllowed = false;
+
+        $isAdminOnly = !empty($req['is_admin_only']) ? $req['is_admin_only'] : 0;
+        $screenPrefix = $req['screen_prefix'];
+
+        $isInvalid = 0;
+        if (!empty($isAdminOnly)){
+            if (!in_array($this->userRoleId, $this->adminRoleIds)){
+                $isInvalid++;
+            }
+        }
+
+        if (empty($isInvalid)){
+            $getScreen = UserScreens::select(
+                'user_screens.*',
+            )
+                ->join('screens', 'user_screens.screen_id', 'screens.id')
+                ->where('user_screens.user_id', $this->userId)
+                ->where('screens.screen_prefix', $screenPrefix)
+                ->where('screens.status', 1)
+                ->where('user_screens.status', 1)
+                ->first();
+            if (!empty($getScreen)){
+                $isAllowed = true;
+            }
+        }
+
+
+        return $isAllowed;
+
     }
 }

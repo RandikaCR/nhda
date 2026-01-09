@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('page_title')
-    All News
+    All Users
 @endsection
 
 @section('breadcrumb')
@@ -9,12 +9,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">NEWS</h4>
+                <h4 class="mb-sm-0">Users</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">NHDA Admin</a></li>
-                        <li class="breadcrumb-item active">NEWS</li>
+                        <li class="breadcrumb-item active">Users</li>
                     </ol>
                 </div>
 
@@ -27,7 +27,7 @@
 @section('header_buttons')
     <div class="row">
         <div class="col-sm-12 d-flex justify-content-end mb-3">
-            <a href="{{ url('admin/news/create') }}" class="btn btn-primary">
+            <a href="{{ url('admin/users/create') }}" class="btn btn-primary">
                 <span class="mdi mdi-plus-box me-2"></span>
                 Add New
             </a>
@@ -67,7 +67,7 @@
                                         <span class="mdi mdi-magnify me-2"></span>
                                         Search
                                     </button>
-                                    <a href="{{ url('admin/news') }}" class="btn btn-outline-dark waves-effect waves-light ms-2">
+                                    <a href="{{ url('admin/users') }}" class="btn btn-outline-dark waves-effect waves-light ms-2">
                                         <span class="mdi mdi-restore me-2"></span>
                                         Clear
                                     </a>
@@ -84,7 +84,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">All News</h4>
+                        <h4 class="card-title mb-0 flex-grow-1">All Users</h4>
                         <div class="flex-shrink-0">
                         </div>
                     </div><!-- end card header -->
@@ -97,14 +97,14 @@
                                         <table class="table table-hover table-striped align-middle table-nowrap mb-0">
                                             <thead>
                                             <tr>
-                                                <th class="text-center" scope="col">
-                                                    <p class="mb-0">ID</p>
-                                                </th>
-                                                <th scope="col" style="width: 10%;">
+                                                <th scope="col" style="width: 5%;">
                                                     <p class="mb-0"></p>
                                                 </th>
                                                 <th scope="col" style="width: 60%;">
-                                                    <p class="mb-0">News Title</p>
+                                                    <p class="mb-0">Name</p>
+                                                </th>
+                                                <th scope="col" style="width: 60%;">
+                                                    <p class="mb-0">User Role</p>
                                                 </th>
                                                 <th class="text-center" scope="col">
                                                     <p class="mb-0">Status</p>
@@ -115,28 +115,26 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($all_news as $news)
+                                            @foreach($users as $user)
                                                 <tr>
-                                                    <td class="fw-medium text-center">
-                                                        <p class="mb-0">{{ $news->id }}</p>
-                                                    </td>
                                                     <td>
                                                         <div class="bg-light rounded p-1">
-                                                            <img src="{{ asset('assets/common/images/uploads/' .$news->primary_image) }}" class="img-fluid d-block" alt="Img">
+                                                            <img src="{{ asset('assets/common/images/default-user.png') }}" class="img-fluid d-block" alt="Img">
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="mb-1">{{ $news->en_title }}</p>
-                                                        <p class="mb-1 text-muted">{{ $news->si_title }}</p>
-                                                        <p class="mb-0">{{ $news->ta_title }}</p>
+                                                        <p class="mb-1">{{ $user->first_name .' '. $user->last_name }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mb-1">{{ $user->user_role }}</p>
                                                     </td>
                                                     <td class="text-center">
-                                                        <p class="mb-0"><span class="badge {{ $news->status()->class }}">{{ $news->status()->text }}</span></p>
+                                                        <p class="mb-0"><span class="badge {{ status($user->status)->class }}">{{ status($user->status)->text }}</span></p>
                                                     </td>
                                                     <td class="text-end">
-                                                        <a href="{{ url('news/' . $news->slug) }}" target="_blank" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><span class="mdi mdi-magnify"></span></a>
-                                                        <a href="{{ route('backend.news.edit', $news->uuid) }}" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><span class="mdi mdi-pencil"></span></a>
-                                                        <a href="javascript:void(0);" class="btn btn-danger btn-sm waves-effect waves-light delete" data-id="{{ $news->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><span class="mdi mdi-delete"></span></a>
+                                                        <a href="{{ route('backend.users.screens', $user->uuid) }}" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Allowed Screens"><span class="mdi mdi-monitor-screenshot"></span></a>
+                                                        <a href="{{ route('backend.users.edit', $user->uuid) }}" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><span class="mdi mdi-pencil"></span></a>
+                                                        <a href="javascript:void(0);" class="btn btn-danger btn-sm waves-effect waves-light delete" data-id="{{ $user->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><span class="mdi mdi-delete"></span></a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -151,7 +149,7 @@
 
                             <div class="mt-5">
                                 {{--Paginaiton--}}
-                                {!! $all_news->links('vendor.pagination.backend') !!}
+                                {!! $users->links('vendor.pagination.backend') !!}
                             </div>
                         </div>
                     </div><!-- end card-body -->
@@ -204,7 +202,7 @@
 
                         setTimeout(function() {
                             $.ajax({
-                                url: "{{ route('backend.news.delete') }}",
+                                url: "{{ route('backend.users.delete') }}",
                                 type: 'POST',
                                 data: {
                                     id: $id,
@@ -221,7 +219,7 @@
                                     });
                                 },
                                 success: function ($response, $textStatus, $jqXHR) {
-                                    Swal.fire('Done!', 'News has been deleted!', 'success');
+                                    Swal.fire('Done!', 'User has been deleted!', 'success');
 
                                     $($this).parent().parent().fadeOut('slow');
                                     setTimeout(function (){
