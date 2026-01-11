@@ -29,6 +29,9 @@ use App\Http\Controllers\Backend\ScreensController AS BackendScreens;
 // U
 use App\Http\Controllers\Backend\UsersController AS BackendUsers;
 
+// V
+use App\Http\Controllers\Backend\VideosController AS BackendVideos;
+
 
 //1 - Frontend Routes
 Route::group([ 'prefix' =>'/', 'middleware' => ['setLocale']], function () {
@@ -124,6 +127,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/users/store', [BackendUsers::class, 'store'])->name('backend.users.store');
         Route::post('/users/delete', [BackendUsers::class, 'delete'])->name('backend.users.delete');
         Route::post('/users/user-screen/set', [BackendUsers::class, 'setUserScreen'])->name('backend.users.setUserScreen');
+
+
+        // V
+
+        Route::get('/videos', [BackendVideos::class, 'index'])->name('backend.videos.index');
+        Route::get('/videos/create', [BackendVideos::class, 'create'])->name('backend.videos.create');
+        Route::get('/videos/edit/{slug}', [BackendVideos::class, 'edit'])->name('backend.videos.edit');
+        Route::post('/videos/store', [BackendVideos::class, 'store'])->name('backend.videos.store');
+        Route::post('/videos/delete', [BackendVideos::class, 'delete'])->name('backend.videos.delete');
+        Route::post('/videos/slug-generator', [BackendVideos::class, 'slugGenerator'])->name('backend.videos.slugGenerator');
 
     });
 
