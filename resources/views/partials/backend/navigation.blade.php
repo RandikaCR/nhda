@@ -169,16 +169,16 @@
                 <li class="menu-title"><span data-key="t-system">Page Setup</span></li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarDistrictOfficeContacts" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'district-office-contacts') ? 'true' : 'false' }}" aria-controls="sidebarDistrictOfficeContacts">
+                    <a class="nav-link menu-link" href="#sidebarDistrictOfficeContacts" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'district-offices') ? 'true' : 'false' }}" aria-controls="sidebarDistrictOfficeContacts">
                         <i class="mdi mdi-gift"></i> <span data-key="t-raffles-main">District Office Contacts</span>
                     </a>
-                    <div class="collapse menu-dropdown {{ (request()->segment(2) == 'district-office-contacts') ? 'show' : '' }}" id="sidebarDistrictOfficeContacts">
+                    <div class="collapse menu-dropdown {{ (request()->segment(2) == 'district-offices') ? 'show' : '' }}" id="sidebarDistrictOfficeContacts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ url('/admin/district-office-contacts') }}" class="nav-link {{ (request()->segment(2) == 'district-office-contacts' && request()->segment(3) == '') ? 'active' : '' }}" data-key="t-district-office-contacts">All District Office Contacts</a>
+                                <a href="{{ url('/admin/district-offices') }}" class="nav-link {{ (request()->segment(2) == 'district-offices' && request()->segment(3) == '') ? 'active' : '' }}" data-key="t-district-office-contacts">All District Office Contacts</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/admin/district-office-contacts/create') }}" class="nav-link {{ (request()->segment(2) == 'district-office-contacts' && request()->segment(3) == 'create') ? 'active' : '' }}" data-key="t-district-office-contacts-add">Add New</a>
+                                <a href="{{ url('/admin/district-offices/create') }}" class="nav-link {{ (request()->segment(2) == 'district-offices' && request()->segment(3) == 'create') ? 'active' : '' }}" data-key="t-district-office-contacts-add">Add New</a>
                             </li>
                         </ul>
                     </div>

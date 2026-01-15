@@ -1,10 +1,10 @@
 @extends('layouts.backend')
 
 @section('page_title')
-    Videos
+    District Office
 
-    @if(isset($video))
-        #{{ $video->id }}
+    @if(isset($office))
+        #{{ $office->id }}
     @endif
 @endsection
 
@@ -13,12 +13,47 @@
 
 @endsection
 
+@section('css')
+
+    <style type="text/css">
+
+        .img-overlay-area{
+            position: absolute;
+            background: rgba(0,0,0,0.2);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            -webkit-transition: all .5s ease-in-out;
+            -o-transition: all .5s ease-in-out;
+            -moz-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+        }
+
+        .img-action:hover .img-overlay-area{
+            opacity: 1;
+            -webkit-transition: all .5s ease-in-out;
+            -o-transition: all .5s ease-in-out;
+            -moz-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .img-border{
+            border: 1px solid #eee;
+        }
+
+    </style>
+
+@endsection
+
 @section('header_buttons')
     <div class="row">
         <div class="col-sm-12 d-flex justify-content-end mb-3">
-            <a href="{{ url('admin/videos') }}" class="btn btn-primary">
+            <a href="{{ url('admin/district-offices') }}" class="btn btn-primary">
                 <span class="mdi mdi-format-list-bulleted-square me-2"></span>
-                All Videos
+                All District Offices
             </a>
         </div>
     </div>
@@ -40,17 +75,16 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('backend.videos.store') }}">
+        <form method="POST" action="{{ route('backend.districtOffices.store') }}">
             @csrf
-            <input type="hidden" name="id" value="{{ isset($video) ? $video->id : '' }}">
-            <div class="row justify-content-center">
-                <div class="col-sm-8">
+            <input type="hidden" name="id" value="{{ isset($office) ? $office->id : '' }}">
+            <div class="row">
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h4 class="card-title">Video Details</h4>
+                                    <h4 class="card-title">District Office Details</h4>
                                 </div>
                                 <div>
                                     <button type="submit" class="btn btn-secondary waves-effect waves-light save-this-form"><i class="mdi mdi-content-save me-1"></i>SAVE</button>
@@ -61,29 +95,48 @@
                             <div class="row">
                                 <div class="col-sm-12 mb-4">
                                     <label>Slug</label>
-                                    <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter here...." value="{{ isset($video) ? $video->slug : '' }}" readonly>
+                                    <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter here...." value="{{ isset($office) ? $office->slug : '' }}" readonly>
                                     <label class="text-danger fw-bold mt-1 d-none" id="slug-warning">Slug already exists!</label>
                                 </div>
 
-                                <div class="col-sm-12 mb-4">
-                                    <label>Title (ENGLISH) *</label>
-                                    <input class="form-control" type="text" id="main-title" name="en_title" placeholder="Enter here...." value="{{ isset($video) ? $video->en_title : '' }}">
+                                <div class="col-sm-6 mb-4">
+                                    <label>Office *</label>
+                                    <input class="form-control" type="text" id="main-title" name="office" placeholder="Enter here...." value="{{ isset($office) ? $office->office : '' }}">
                                 </div>
 
-                                <div class="col-sm-12 mb-4">
-                                    <label>Title (SINHALA)</label>
-                                    <input class="form-control" type="text" id="title-si" name="si_title" placeholder="Enter here...." value="{{ isset($video) ? $video->si_title : '' }}">
+                                <div class="col-sm-6 mb-4">
+                                    <label>Manager Name</label>
+                                    <input class="form-control" type="text" name="manager_name" placeholder="Enter here...." value="{{ isset($office) ? $office->manager_name : '' }}">
                                 </div>
 
-                                <div class="col-sm-12 mb-4">
-                                    <label>Title (TAMIL)</label>
-                                    <input class="form-control" type="text" id="title-ta" name="ta_title" placeholder="Enter here...." value="{{ isset($video) ? $video->ta_title : '' }}">
+                                <div class="col-sm-3 mb-4">
+                                    <label>Phone</label>
+                                    <input class="form-control" type="text" name="phone" placeholder="Enter here...." value="{{ isset($office) ? $office->phone : '' }}">
+                                </div>
+                                <div class="col-sm-3 mb-4">
+                                    <label>Mobile</label>
+                                    <input class="form-control" type="text" name="mobile" placeholder="Enter here...." value="{{ isset($office) ? $office->mobile : '' }}">
+                                </div>
+                                <div class="col-sm-3 mb-4">
+                                    <label>Email Address</label>
+                                    <input class="form-control" type="text" name="email" placeholder="Enter here...." value="{{ isset($office) ? $office->email : '' }}">
+                                </div>
+                                <div class="col-sm-3 mb-4">
+                                    <label>FAX</label>
+                                    <input class="form-control" type="text" name="fax" placeholder="Enter here...." value="{{ isset($office) ? $office->fax : '' }}">
+                                </div>
+                                <div class="col-sm-8 mb-4">
+                                    <label>Address</label>
+                                    <textarea id="content-en" name="address">
+                                    {{ isset($office) ? $office->address : '' }}
+                                </textarea>
+                                </div>
+                                <div class="col-sm-4 mb-4">
+                                    <label>Map</label>
+                                    <input class="form-control" type="text" name="map" placeholder="Enter here...." value="{{ isset($office) ? $office->map : '' }}">
                                 </div>
 
-                                <div class="col-sm-12 mb-4">
-                                    <label>Video *</label>
-                                    <input class="form-control" type="text" id="video" name="video" placeholder="Enter here...." value="{{ isset($video) ? $video->video : '' }}">
-                                </div>
+
 
                             </div>
                         </div>
@@ -133,6 +186,17 @@
         }
 
 
+        ClassicEditor.create(document.querySelector("#content-en"), {
+            toolbar: []
+        })
+            .then(function (e) {
+                e.ui.view.editable.element.style.height = "60px";
+            })
+            .catch(function (e) {
+                console.error(e);
+            });
+
+
         $isSending = false;
 
         function getSlug(){
@@ -141,7 +205,7 @@
 
             if(!$isSending){
                 $.ajax({
-                    url: "{{ route('backend.projects.slugGenerator') }}",
+                    url: "{{ route('backend.districtOffices.slugGenerator') }}",
                     dataType: 'json',
                     data: {
                         id: $id,
@@ -189,6 +253,7 @@
                     }
                 }, 400);
             });
+
 
         });
 

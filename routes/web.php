@@ -11,7 +11,9 @@ use App\Http\Controllers\Frontend\FrontendController AS Frontend;
 
 // D
 use App\Http\Controllers\Backend\DashboardController AS BackendDashboard;
+use App\Http\Controllers\Backend\DownloadsController AS BackendDownloads;
 use App\Http\Controllers\Backend\DownloadCategoriesController AS BackendDownloadCategories;
+use App\Http\Controllers\Backend\DistrictOfficesController AS BackendDistrictOffices;
 
 // L
 use App\Http\Controllers\Backend\LocalizationsController AS BackendLocalizations;
@@ -25,6 +27,8 @@ use App\Http\Controllers\Backend\ProjectsController AS BackendProjects;
 
 // S
 use App\Http\Controllers\Backend\ScreensController AS BackendScreens;
+use App\Http\Controllers\Backend\ServicesController AS BackendServices;
+use App\Http\Controllers\Backend\ServiceFunctionsController AS BackendServiceFunctions;
 
 // U
 use App\Http\Controllers\Backend\UsersController AS BackendUsers;
@@ -61,11 +65,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // D
         Route::get('/', [BackendDashboard::class, 'index'])->name('backend.dashboard');
 
+        Route::get('/downloads', [BackendDownloads::class, 'index'])->name('backend.downloads.index');
+        Route::get('/downloads/create', [BackendDownloads::class, 'create'])->name('backend.downloads.create');
+        Route::get('/downloads/edit/{slug}', [BackendDownloads::class, 'edit'])->name('backend.downloads.edit');
+        Route::post('/downloads/store', [BackendDownloads::class, 'store'])->name('backend.downloads.store');
+        Route::post('/downloads/delete', [BackendDownloads::class, 'delete'])->name('backend.downloads.delete');
+        Route::post('/downloads/slug-generator', [BackendDownloads::class, 'slugGenerator'])->name('backend.downloads.slugGenerator');
+        Route::post('/downloads/upload-file', [BackendDownloads::class, 'fileUpload'])->name('backend.downloads.fileUpload');
+
         Route::get('/download-categories', [BackendDownloadCategories::class, 'index'])->name('backend.downloadCategories.index');
         Route::post('/download-categories/store', [BackendDownloadCategories::class, 'store'])->name('backend.downloadCategories.store');
         Route::post('/download-categories/get', [BackendDownloadCategories::class, 'get'])->name('backend.downloadCategories.get');
         Route::post('/download-categories/status', [BackendDownloadCategories::class, 'status'])->name('backend.downloadCategories.status');
         Route::post('/download-categories/slug-generator', [BackendDownloadCategories::class, 'slugGenerator'])->name('backend.downloadCategories.slugGenerator');
+
+        Route::get('/district-offices', [BackendDistrictOffices::class, 'index'])->name('backend.districtOffices.index');
+        Route::get('/district-offices/create', [BackendDistrictOffices::class, 'create'])->name('backend.districtOffices.create');
+        Route::get('/district-offices/edit/{slug}', [BackendDistrictOffices::class, 'edit'])->name('backend.districtOffices.edit');
+        Route::post('/district-offices/store', [BackendDistrictOffices::class, 'store'])->name('backend.districtOffices.store');
+        Route::post('/district-offices/delete', [BackendDistrictOffices::class, 'delete'])->name('backend.districtOffices.delete');
+        Route::post('/district-offices/slug-generator', [BackendDistrictOffices::class, 'slugGenerator'])->name('backend.districtOffices.slugGenerator');
 
 
         // L
@@ -117,6 +136,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/screens/get', [BackendScreens::class, 'get'])->name('backend.screens.get');
         Route::post('/screens/status', [BackendScreens::class, 'status'])->name('backend.screens.status');
         Route::post('/screens/slug-generator', [BackendScreens::class, 'slugGenerator'])->name('backend.screens.slugGenerator');
+
+        Route::get('/services', [BackendServices::class, 'index'])->name('backend.services.index');
+        Route::post('/services/store', [BackendServices::class, 'store'])->name('backend.services.store');
+
+        Route::get('/service-functions', [BackendServiceFunctions::class, 'index'])->name('backend.serviceFunctions.index');
+        Route::get('/service-functions/create', [BackendServiceFunctions::class, 'create'])->name('backend.serviceFunctions.create');
+        Route::get('/service-functions/edit/{slug}', [BackendServiceFunctions::class, 'edit'])->name('backend.serviceFunctions.edit');
+        Route::post('/service-functions/store', [BackendServiceFunctions::class, 'store'])->name('backend.serviceFunctions.store');
+        Route::post('/service-functions/delete', [BackendServiceFunctions::class, 'delete'])->name('backend.serviceFunctions.delete');
+        Route::post('/service-functions/slug-generator', [BackendServiceFunctions::class, 'slugGenerator'])->name('backend.serviceFunctions.slugGenerator');
 
 
         // U

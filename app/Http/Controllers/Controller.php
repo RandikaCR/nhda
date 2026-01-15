@@ -69,7 +69,6 @@ abstract class Controller
     }
 
 
-
     public function dbInsertTime($dateTime = null){
         if (!empty($dateTime)){
             $now = date('Y-m-d H:i:s', strtotime($dateTime));
@@ -177,4 +176,5 @@ abstract class Controller
         return $isAllowed;
 
     }
+
 }

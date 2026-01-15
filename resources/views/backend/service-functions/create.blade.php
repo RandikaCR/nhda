@@ -1,10 +1,10 @@
 @extends('layouts.backend')
 
 @section('page_title')
-    Videos
+    Service Functions
 
-    @if(isset($video))
-        #{{ $video->id }}
+    @if(isset($sf))
+        #{{ $sf->id }}
     @endif
 @endsection
 
@@ -13,12 +13,47 @@
 
 @endsection
 
+@section('css')
+
+    <style type="text/css">
+
+        .img-overlay-area{
+            position: absolute;
+            background: rgba(0,0,0,0.2);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            -webkit-transition: all .5s ease-in-out;
+            -o-transition: all .5s ease-in-out;
+            -moz-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+        }
+
+        .img-action:hover .img-overlay-area{
+            opacity: 1;
+            -webkit-transition: all .5s ease-in-out;
+            -o-transition: all .5s ease-in-out;
+            -moz-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .img-border{
+            border: 1px solid #eee;
+        }
+
+    </style>
+
+@endsection
+
 @section('header_buttons')
     <div class="row">
         <div class="col-sm-12 d-flex justify-content-end mb-3">
-            <a href="{{ url('admin/videos') }}" class="btn btn-primary">
+            <a href="{{ url('admin/service-functions') }}" class="btn btn-primary">
                 <span class="mdi mdi-format-list-bulleted-square me-2"></span>
-                All Videos
+                All Service Functions
             </a>
         </div>
     </div>
@@ -40,17 +75,17 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('backend.videos.store') }}">
+        <form method="POST" action="{{ route('backend.serviceFunctions.store') }}">
             @csrf
-            <input type="hidden" name="id" value="{{ isset($video) ? $video->id : '' }}">
-            <div class="row justify-content-center">
-                <div class="col-sm-8">
+            <input type="hidden" name="id" value="{{ isset($sf) ? $sf->id : '' }}">
+            <input type="hidden" id="temp_id" name="temp_id" value="{{ $temp_id }}">
+            <div class="row">
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h4 class="card-title">Video Details</h4>
+                                    <h4 class="card-title">Service Function Details</h4>
                                 </div>
                                 <div>
                                     <button type="submit" class="btn btn-secondary waves-effect waves-light save-this-form"><i class="mdi mdi-content-save me-1"></i>SAVE</button>
@@ -61,29 +96,50 @@
                             <div class="row">
                                 <div class="col-sm-12 mb-4">
                                     <label>Slug</label>
-                                    <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter here...." value="{{ isset($video) ? $video->slug : '' }}" readonly>
+                                    <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter here...." value="{{ isset($sf) ? $sf->slug : '' }}" readonly>
                                     <label class="text-danger fw-bold mt-1 d-none" id="slug-warning">Slug already exists!</label>
                                 </div>
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Title (ENGLISH) *</label>
-                                    <input class="form-control" type="text" id="main-title" name="en_title" placeholder="Enter here...." value="{{ isset($video) ? $video->en_title : '' }}">
+                                    <input class="form-control" type="text" id="main-title" name="en_title" placeholder="Enter here...." value="{{ isset($sf) ? $sf->en_title : '' }}">
                                 </div>
+
+                                <div class="col-sm-12 mb-4">
+                                    <label>Content (ENGLISH)</label>
+                                    <textarea id="content-en" name="en_content">
+                                    {{ isset($sf) ? $sf->en_content : '' }}
+                                </textarea>
+                                </div>
+
+                                <hr class="my-4">
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Title (SINHALA)</label>
-                                    <input class="form-control" type="text" id="title-si" name="si_title" placeholder="Enter here...." value="{{ isset($video) ? $video->si_title : '' }}">
+                                    <input class="form-control" type="text" id="title-si" name="si_title" placeholder="Enter here...." value="{{ isset($sf) ? $sf->si_title : '' }}">
                                 </div>
+
+                                <div class="col-sm-12 mb-4">
+                                    <label>Content (SINHALA)</label>
+                                    <textarea id="content-si" name="si_content">
+                                    {{ isset($sf) ? $sf->si_content : '' }}
+                                </textarea>
+                                </div>
+
+                                <hr class="my-4">
 
                                 <div class="col-sm-12 mb-4">
                                     <label>Title (TAMIL)</label>
-                                    <input class="form-control" type="text" id="title-ta" name="ta_title" placeholder="Enter here...." value="{{ isset($video) ? $video->ta_title : '' }}">
+                                    <input class="form-control" type="text" id="title-ta" name="ta_title" placeholder="Enter here...." value="{{ isset($sf) ? $sf->ta_title : '' }}">
                                 </div>
 
                                 <div class="col-sm-12 mb-4">
-                                    <label>Video *</label>
-                                    <input class="form-control" type="text" id="video" name="video" placeholder="Enter here...." value="{{ isset($video) ? $video->video : '' }}">
+                                    <label>Content (TAMIL)</label>
+                                    <textarea id="content-ta" name="ta_content">
+                                    {{ isset($sf) ? $sf->ta_content : '' }}
+                                </textarea>
                                 </div>
+
 
                             </div>
                         </div>
@@ -132,6 +188,30 @@
 
         }
 
+        ClassicEditor.create(document.querySelector("#content-en"))
+            .then(function (e) {
+                e.ui.view.editable.element.style.height = "200px";
+            })
+            .catch(function (e) {
+                console.error(e);
+            });
+
+        ClassicEditor.create(document.querySelector("#content-si"))
+            .then(function (e) {
+                e.ui.view.editable.element.style.height = "200px";
+            })
+            .catch(function (e) {
+                console.error(e);
+            });
+
+        ClassicEditor.create(document.querySelector("#content-ta"))
+            .then(function (e) {
+                e.ui.view.editable.element.style.height = "200px";
+            })
+            .catch(function (e) {
+                console.error(e);
+            });
+
 
         $isSending = false;
 
@@ -141,7 +221,7 @@
 
             if(!$isSending){
                 $.ajax({
-                    url: "{{ route('backend.projects.slugGenerator') }}",
+                    url: "{{ route('backend.serviceFunctions.slugGenerator') }}",
                     dataType: 'json',
                     data: {
                         id: $id,
@@ -189,6 +269,7 @@
                     }
                 }, 400);
             });
+
 
         });
 
