@@ -185,32 +185,32 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarSeniorStaff" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'senior-staff') ? 'true' : 'false' }}" aria-controls="sidebarSeniorStaff">
-                        <i class="mdi mdi-gift"></i> <span data-key="t-raffles-main">Senior Staff</span>
+                    <a class="nav-link menu-link" href="#sidebarSeniorStaff" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'senior-staff-members') ? 'true' : 'false' }}" aria-controls="sidebarSeniorStaff">
+                        <i class="mdi mdi-gift"></i> <span data-key="t-raffles-main">Senior Staff Members</span>
                     </a>
-                    <div class="collapse menu-dropdown {{ (request()->segment(2) == 'senior-staff') ? 'show' : '' }}" id="sidebarSeniorStaff">
+                    <div class="collapse menu-dropdown {{ (request()->segment(2) == 'senior-staff-members') ? 'show' : '' }}" id="sidebarSeniorStaff">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ url('/admin/senior-staff') }}" class="nav-link {{ (request()->segment(2) == 'senior-staff' && request()->segment(3) == '') ? 'active' : '' }}" data-key="t-senior-staff">All Senior Staff</a>
+                                <a href="{{ url('/admin/senior-staff-members') }}" class="nav-link {{ (request()->segment(2) == 'senior-staff-members' && request()->segment(3) == '') ? 'active' : '' }}" data-key="t-senior-staff">All Senior Staff Members</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/admin/senior-staff/create') }}" class="nav-link {{ (request()->segment(2) == 'senior-staff' && request()->segment(3) == 'create') ? 'active' : '' }}" data-key="t-senior-staff-add">Add New</a>
+                                <a href="{{ url('/admin/senior-staff-members/create') }}" class="nav-link {{ (request()->segment(2) == 'senior-staff-members' && request()->segment(3) == 'create') ? 'active' : '' }}" data-key="t-senior-staff-add">Add New</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarBoardOfDirectors" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'board-of-directors') ? 'true' : 'false' }}" aria-controls="sidebarBoardOfDirectors">
+                    <a class="nav-link menu-link" href="#sidebarBoardOfDirectors" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'directors') ? 'true' : 'false' }}" aria-controls="sidebarBoardOfDirectors">
                         <i class="mdi mdi-gift"></i> <span data-key="t-raffles-main">Board Of Directors</span>
                     </a>
-                    <div class="collapse menu-dropdown {{ (request()->segment(2) == 'board-of-directors') ? 'show' : '' }}" id="sidebarBoardOfDirectors">
+                    <div class="collapse menu-dropdown {{ (request()->segment(2) == 'directors') ? 'show' : '' }}" id="sidebarBoardOfDirectors">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ url('/admin/board-of-directors') }}" class="nav-link {{ (request()->segment(2) == 'board-of-directors' && request()->segment(3) == '') ? 'active' : '' }}" data-key="t-board-of-directors">All Board Of Directors</a>
+                                <a href="{{ url('/admin/directors') }}" class="nav-link {{ (request()->segment(2) == 'directors' && request()->segment(3) == '') ? 'active' : '' }}" data-key="t-board-of-directors">All Board Of Directors</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/admin/board-of-directors/create') }}" class="nav-link {{ (request()->segment(2) == 'board-of-directors' && request()->segment(3) == 'create') ? 'active' : '' }}" data-key="t-board-of-directors-add">Add New</a>
+                                <a href="{{ url('/admin/directors/create') }}" class="nav-link {{ (request()->segment(2) == 'directors' && request()->segment(3) == 'create') ? 'active' : '' }}" data-key="t-board-of-directors-add">Add New</a>
                             </li>
                         </ul>
                     </div>

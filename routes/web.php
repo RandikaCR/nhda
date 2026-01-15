@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\DashboardController AS BackendDashboard;
 use App\Http\Controllers\Backend\DownloadsController AS BackendDownloads;
 use App\Http\Controllers\Backend\DownloadCategoriesController AS BackendDownloadCategories;
 use App\Http\Controllers\Backend\DistrictOfficesController AS BackendDistrictOffices;
+use App\Http\Controllers\Backend\DirectorsController AS BackendDirectors;
 
 // L
 use App\Http\Controllers\Backend\LocalizationsController AS BackendLocalizations;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Backend\ProjectsController AS BackendProjects;
 use App\Http\Controllers\Backend\ScreensController AS BackendScreens;
 use App\Http\Controllers\Backend\ServicesController AS BackendServices;
 use App\Http\Controllers\Backend\ServiceFunctionsController AS BackendServiceFunctions;
+use App\Http\Controllers\Backend\SeniorStaffMembersController AS BackendSeniorStaffMembers;
 
 // U
 use App\Http\Controllers\Backend\UsersController AS BackendUsers;
@@ -85,6 +87,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/district-offices/store', [BackendDistrictOffices::class, 'store'])->name('backend.districtOffices.store');
         Route::post('/district-offices/delete', [BackendDistrictOffices::class, 'delete'])->name('backend.districtOffices.delete');
         Route::post('/district-offices/slug-generator', [BackendDistrictOffices::class, 'slugGenerator'])->name('backend.districtOffices.slugGenerator');
+
+        Route::get('/directors', [BackendDirectors::class, 'index'])->name('backend.directors.index');
+        Route::get('/directors/create', [BackendDirectors::class, 'create'])->name('backend.directors.create');
+        Route::get('/directors/edit/{slug}', [BackendDirectors::class, 'edit'])->name('backend.directors.edit');
+        Route::post('/directors/store', [BackendDirectors::class, 'store'])->name('backend.directors.store');
+        Route::post('/directors/delete', [BackendDirectors::class, 'delete'])->name('backend.directors.delete');
+        Route::post('/directors/slug-generator', [BackendDirectors::class, 'slugGenerator'])->name('backend.directors.slugGenerator');
+        Route::post('/directors/upload-image', [BackendDirectors::class, 'imageUpload'])->name('backend.directors.imageUpload');
 
 
         // L
@@ -146,6 +156,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/service-functions/store', [BackendServiceFunctions::class, 'store'])->name('backend.serviceFunctions.store');
         Route::post('/service-functions/delete', [BackendServiceFunctions::class, 'delete'])->name('backend.serviceFunctions.delete');
         Route::post('/service-functions/slug-generator', [BackendServiceFunctions::class, 'slugGenerator'])->name('backend.serviceFunctions.slugGenerator');
+
+        Route::get('/senior-staff-members', [BackendSeniorStaffMembers::class, 'index'])->name('backend.seniorStaffMembers.index');
+        Route::get('/senior-staff-members/create', [BackendSeniorStaffMembers::class, 'create'])->name('backend.seniorStaffMembers.create');
+        Route::get('/senior-staff-members/edit/{slug}', [BackendSeniorStaffMembers::class, 'edit'])->name('backend.seniorStaffMembers.edit');
+        Route::post('/senior-staff-members/store', [BackendSeniorStaffMembers::class, 'store'])->name('backend.seniorStaffMembers.store');
+        Route::post('/senior-staff-members/delete', [BackendSeniorStaffMembers::class, 'delete'])->name('backend.seniorStaffMembers.delete');
+        Route::post('/senior-staff-members/slug-generator', [BackendSeniorStaffMembers::class, 'slugGenerator'])->name('backend.seniorStaffMembers.slugGenerator');
+        Route::post('/senior-staff-members/upload-image', [BackendSeniorStaffMembers::class, 'imageUpload'])->name('backend.seniorStaffMembers.imageUpload');
 
 
         // U
