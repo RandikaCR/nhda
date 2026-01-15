@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Helpers\DownloadCategoriesHelper;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,11 +30,15 @@ class AppServiceProvider extends ServiceProvider
                 $reservationsCount = $oc['count'];*/
                 $reservationsCount = 88;
                 view()->share('navReservationsCount', $reservationsCount);
-
-
             });
-
-
+        }
+        else{
+            view()->composer('*', function ($view) {
+                // Get Download Categories
+                $dch = new DownloadCategoriesHelper();
+                $navDownloadCategories = $dch->getDownloadCategoriesForNavigation();
+                view()->share('navDownloadCategories', $navDownloadCategories);
+            });
         }
     }
 }

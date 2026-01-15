@@ -42,6 +42,8 @@ class DownloadCategoriesController extends Controller
             'id' => $id,
             'slug' => $get->slug,
             'download_category' => $get->download_category,
+            'download_category_si' => $get->download_category_si,
+            'download_category_ta' => $get->download_category_ta,
         ];
         return response()->json($out);
 
@@ -74,6 +76,8 @@ class DownloadCategoriesController extends Controller
 
             $save->slug = !empty($req['slug']) ? $req['slug'] : null;
             $save->download_category = !empty($req['download_category']) ? $req['download_category'] : null;
+            $save->download_category_si = !empty($req['download_category_si']) ? $req['download_category_si'] : null;
+            $save->download_category_ta = !empty($req['download_category_ta']) ? $req['download_category_ta'] : null;
             $save->save();
             $status = 'success';
             $messageTitle = 'Success';

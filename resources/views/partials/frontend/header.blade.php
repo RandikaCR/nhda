@@ -318,10 +318,9 @@ Header Area
                                         <li class="menu-item-has-children">
                                             <a href="#">{{ __('lang.downloads') }}</a>
                                             <ul class="sub-menu">
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
-                                                <li><a href="{{ url('/dowload-category-slug') }}">Download Category</a></li>
+                                                @foreach($navDownloadCategories as $navCat)
+                                                    <li><a href="{{ url('downloads/' . $navCat['slug']) }}">{{ $navCat['download_category'] }}</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">

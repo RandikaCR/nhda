@@ -51,7 +51,9 @@
                                             @foreach($items as $item)
                                                 <tr id="row-{{ $item->id }}">
                                                     <td>
-                                                        <p class="mb-0">{{ $item->download_category }}</p>
+                                                        <p class="mb-1">{{ $item->download_category }}</p>
+                                                        <p class="mb-1 text-muted">{{ $item->download_category_si }}</p>
+                                                        <p class="mb-0">{{ $item->download_category_ta }}</p>
                                                     </td>
                                                     <td class="text-center">
                                                         <p class="mb-0"><span class="badge {{ status($item->status)->class }}">{{ status($item->status)->text }}</span></p>
@@ -98,8 +100,20 @@
                             </div>
                             <div class="col-sm-12 mb-3">
                                 <div>
-                                    <label for="category-input" class="form-label">Download Category Name*</label>
+                                    <label for="category-input" class="form-label">Download Category Name (ENGLISH) *</label>
                                     <input type="text" class="form-control" id="category-input" placeholder="Enter here....">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mb-3">
+                                <div>
+                                    <label for="category-input-si" class="form-label">Download Category Name (SINHALA)</label>
+                                    <input type="text" class="form-control" id="category-input-si" placeholder="Enter here....">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mb-3">
+                                <div>
+                                    <label for="category-input-ta" class="form-label">Download Category Name (TAMIL)</label>
+                                    <input type="text" class="form-control" id="category-input-ta" placeholder="Enter here....">
                                 </div>
                             </div>
                             <div class="col-sm-12" id="form-alert-area">
@@ -196,6 +210,8 @@
                 $id = $('#edit-id').val();
                 $slug = $.trim($('#slug-input').val());
                 $category = $.trim($('#category-input').val());
+                $categorySi = $.trim($('#category-input-si').val());
+                $categoryTa = $.trim($('#category-input-ta').val());
 
                 $isInvalid = 0;
                 if($category == ''){
@@ -218,6 +234,8 @@
                             id: $id,
                             slug: $slug,
                             download_category: $category,
+                            download_category_si: $categorySi,
+                            download_category_ta: $categoryTa,
                             _token: csrf_token()
                         },
                         method: 'POST',
@@ -229,6 +247,8 @@
                             $('#edit-id').val(0);
                             $('#slug-input').val('');
                             $('#category-input').val('');
+                            $('#category-input-si').val('');
+                            $('#category-input-ta').val('');
                             $('#form-alert-area').html('');
                             $alert = alertSuccess($res.message_text, $res.message_title);
                             $('#form-alert-area').html($alert);
@@ -282,11 +302,15 @@
                         $('#edit-id').val(0);
                         $('#slug-input').val('');
                         $('#category-input').val('');
+                        $('#category-input-si').val('');
+                        $('#category-input-ta').val('');
                     },
                     success: function ($res, $textStatus, $jqXHR) {
                         $('#edit-id').val($res.id);
                         $('#slug-input').val($res.slug);
                         $('#category-input').val($res.download_category);
+                        $('#category-input-si').val($res.download_category_si);
+                        $('#category-input-ta').val($res.download_category_ta);
                         $('#form-alert-area').html('');
                         $('.save-this-form').prop('disabled', false);
 
