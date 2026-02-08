@@ -16,6 +16,12 @@ use App\Http\Controllers\Backend\DownloadCategoriesController AS BackendDownload
 use App\Http\Controllers\Backend\DistrictOfficesController AS BackendDistrictOffices;
 use App\Http\Controllers\Backend\DirectorsController AS BackendDirectors;
 
+// G
+use App\Http\Controllers\Backend\GeneralAboutDetailsController AS BackendGeneralAboutDetails;
+
+// L
+use App\Http\Controllers\Backend\HomeBannersController AS BackendHomeBanners;
+
 // L
 use App\Http\Controllers\Backend\LocalizationsController AS BackendLocalizations;
 
@@ -43,6 +49,10 @@ use App\Http\Controllers\Backend\VideosController AS BackendVideos;
 Route::group([ 'prefix' =>'/', 'middleware' => ['setLocale']], function () {
 
     Route::get('/', [Frontend::class, 'index'])->name('frontend.homepage');
+    Route::get('/about-us', [Frontend::class, 'aboutUs'])->name('frontend.newsAndEvents.aboutUs');
+    Route::get('/news-and-events', [Frontend::class, 'newsAndEvents'])->name('frontend.newsAndEvents.index');
+    Route::get('/projects-and-programmes', [Frontend::class, 'newsAndEvents'])->name('frontend.newsAndEvents.index');
+    Route::get('/news/{slug}', [Frontend::class, 'newsAndEventsView'])->name('frontend.newsAndEvents.view');
 
     Route::get('/set-localization/{lang}', [Frontend::class, 'localization'])->name('frontend.localization');
 
@@ -95,6 +105,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/directors/delete', [BackendDirectors::class, 'delete'])->name('backend.directors.delete');
         Route::post('/directors/slug-generator', [BackendDirectors::class, 'slugGenerator'])->name('backend.directors.slugGenerator');
         Route::post('/directors/upload-image', [BackendDirectors::class, 'imageUpload'])->name('backend.directors.imageUpload');
+
+
+        // G
+        Route::get('/general-about-details', [BackendGeneralAboutDetails::class, 'index'])->name('backend.generalAboutDetails.index');
+        Route::post('/general-about-details/store', [BackendGeneralAboutDetails::class, 'store'])->name('backend.generalAboutDetails.store');
 
 
         // L

@@ -22,15 +22,13 @@
 <div class="preloader ">
     <button class="th-btn preloaderCls">Cancel Preloader </button>
     <div class="preloader-inner">
-        <img src="{{ asset('assets/frontend/img/logo-icon.svg') }}" alt="img">
-        <span class="loader">
-                Stadum
-                <span class="loading-text">Stadum</span>
-            </span>
+        <img src="{{ asset('assets/common/images/nhda-logo_1.png') }}" alt="img">
     </div>
 </div>
 
 @include('partials.frontend.header')
+
+@yield('breadcrumb')
 
 @yield('content')
 

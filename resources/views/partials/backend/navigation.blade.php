@@ -216,6 +216,25 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarHomepage" data-bs-toggle="collapse" role="button" aria-expanded="{{ (request()->segment(2) == 'homepage') ? 'true' : 'false' }}" aria-controls="sidebarHomepage">
+                        <i class="mdi mdi-gift"></i> <span data-key="t-raffles-main">Homepage Manager</span>
+                    </a>
+                    <div class="collapse menu-dropdown {{ (request()->segment(2) == 'homepage') ? 'show' : '' }}" id="sidebarHomepage">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ url('/admin/homepage/banners') }}" class="nav-link {{ (request()->segment(2) == 'homepage' && request()->segment(3) == 'banners') ? 'active' : '' }}" data-key="t-homepage-banners">Banners</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ (request()->segment(2) == 'general-about-details') ? 'active' : '' }}" href="{{ url('/admin/general-about-details') }}">
+                        <i class="mdi mdi-account-details"></i> <span data-key="t-general-about-details">About Details</span>
+                    </a>
+                </li>
+
 
                 <li class="menu-title"><span data-key="t-system">Settings</span></li>
 

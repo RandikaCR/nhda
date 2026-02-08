@@ -19,7 +19,7 @@ class NewsController extends Controller
             'news.*',
             'news_images.image AS primary_image',
         )
-            ->join('news_images', 'news.id', 'news_images.news_id')
+            ->leftJoin('news_images', 'news.id', 'news_images.news_id')
             ->when(!empty($keyword), function ($query) use ($keyword) {
                 return $query->where('news.en_title', 'like', "%$keyword%")
                     ->orWhere('news.si_title', 'like', "%$keyword%")
@@ -28,7 +28,7 @@ class NewsController extends Controller
                     ->orWhere('news.si_content', 'like', "%$keyword%")
                     ->orWhere('news.ta_content', 'like', "%$keyword%");
             })
-            ->where('news_images.is_primary', 1)
+            //->where('news_images.is_primary', 1)
             ->orderBy('news.id', 'DESC')
             ->groupBy('news.id')
             ->paginate(20)

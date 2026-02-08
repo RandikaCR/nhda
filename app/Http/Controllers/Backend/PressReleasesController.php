@@ -19,7 +19,7 @@ class PressReleasesController extends Controller
             'press_releases.*',
             'press_release_images.image AS primary_image',
         )
-            ->join('press_release_images', 'press_releases.id', 'press_release_images.press_release_id')
+            ->leftJoin('press_release_images', 'press_releases.id', 'press_release_images.press_release_id')
             ->when(!empty($keyword), function ($query) use ($keyword) {
                 return $query->where('press_releases.en_title', 'like', "%$keyword%")
                     ->orWhere('press_releases.si_title', 'like', "%$keyword%")
@@ -28,7 +28,7 @@ class PressReleasesController extends Controller
                     ->orWhere('press_releases.si_content', 'like', "%$keyword%")
                     ->orWhere('press_releases.ta_content', 'like', "%$keyword%");
             })
-            ->where('press_release_images.is_primary', 1)
+            //->where('press_release_images.is_primary', 1)
             ->orderBy('press_releases.id', 'DESC')
             ->groupBy('press_releases.id')
             ->paginate(20)

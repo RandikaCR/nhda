@@ -25614,7 +25614,8 @@ span.select2-selection.select2-selection--single:focus {
   background-attachment: fixed;
   background-size: cover;
   background-position: 100% 100%;
-  padding: 310px 0;
+    //padding: 310px 0;
+    padding: 0 !important;
   /* Medium devices */
 }
 
@@ -27693,15 +27694,21 @@ span.select2-selection.select2-selection--single:focus {
   text-transform: uppercase;
   margin-bottom: 0;
   z-index: 3;
+    text-align: center;
+    line-height: 16px;
 }
 
 .event-card-tag .tag-number {
   display: block;
   font-weight: 500;
   font-size: 24px;
-  line-height: 1;
+  line-height: 34px;
   letter-spacing: 0.02em;
   text-align: center;
+}
+
+.event-card-tag .tag-year {
+    font-size: 12px;
 }
 
 /*------------------- 4.00. Story -------------------*/

@@ -19,7 +19,7 @@ class ProjectsController extends Controller
             'projects.*',
             'project_images.image AS primary_image',
         )
-            ->join('project_images', 'projects.id', 'project_images.project_id')
+            ->leftJoin('project_images', 'projects.id', 'project_images.project_id')
             ->when(!empty($keyword), function ($query) use ($keyword) {
                 return $query->where('projects.en_title', 'like', "%$keyword%")
                     ->orWhere('projects.si_title', 'like', "%$keyword%")
@@ -28,7 +28,7 @@ class ProjectsController extends Controller
                     ->orWhere('projects.si_content', 'like', "%$keyword%")
                     ->orWhere('projects.ta_content', 'like', "%$keyword%");
             })
-            ->where('project_images.is_primary', 1)
+            //->where('project_images.is_primary', 1)
             ->orderBy('projects.id', 'DESC')
             ->groupBy('projects.id')
             ->paginate(20)

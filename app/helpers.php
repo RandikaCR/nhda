@@ -16,6 +16,18 @@ function dateFormat($date){
     return date('d-F-Y', strtotime($date));
 }
 
+function dateFormatDate($date){
+    return date('d', strtotime($date));
+}
+
+function dateFormatMonthSmall($date){
+    return date('M', strtotime($date));
+}
+
+function dateFormatYear($date){
+    return date('Y', strtotime($date));
+}
+
 function orderIdFormat($orderId){
     return str_pad($orderId, 6, '0', STR_PAD_LEFT);
 }
@@ -28,18 +40,18 @@ function stringLimitLength($string, $limit){
 
 function status($getStatus){
 
-        $status = 'Inactive';
-        $statusClass = 'bg-warning';
+    $status = 'Inactive';
+    $statusClass = 'bg-warning';
 
-        if ($getStatus == 1){
-            $status = 'Active';
-            $statusClass = 'bg-success';
-        }
-
-        return (Object)[
-            'text' => $status,
-            'class' => $statusClass,
-        ];
+    if ($getStatus == 1){
+        $status = 'Active';
+        $statusClass = 'bg-success';
     }
+
+    return (Object)[
+        'text' => $status,
+        'class' => $statusClass,
+    ];
+}
 
 ?>

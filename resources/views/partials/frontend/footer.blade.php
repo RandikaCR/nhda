@@ -5,8 +5,13 @@
                 <div class="col-md-6 col-xl-auto">
                     <div class="widget footer-widget">
                         <div class="th-widget-about">
-                            <h3 class="widget_title">About Stadum</h3>
-                            <p class="about-text">Since 1999, when the newly minted Stadum team embraced its mandate to breathe new life into the downtrodden neighbourhood, East Village’s transformation has been nothing short of remarkable.</p>
+                            <h3 class="widget_title">{{ __('lang.head_office') }}</h3>
+                            <p class="about-text">National Housing Development Authority
+                                <br>Sir Chitampalam A Gardiner Mawatha,
+                                <br>P.O Box 1826,
+                                <br>Colombo 02.
+                                <br>Sri Lanka.
+                            </p>
                             <div class="footer-info">
                                 <a href="tel:+94112431722">
                                     <span class="footer-info-icon"><i class="fa-solid fa-phone"></i></span> +94 11-2431722
@@ -20,76 +25,30 @@
                 </div>
                 <div class="col-sm-6 col-xl-auto">
                     <div class="widget widget_nav_menu footer-widget">
-                        <h3 class="widget_title">Useful Links</h3>
+                        <h3 class="widget_title">{{ __('lang.quick_access') }}</h3>
                         <div class="menu-all-pages-container">
                             <ul class="menu">
-                                <li><a href="index.html">Students</a></li>
-                                <li><a href="about.html">Admission</a></li>
-                                <li><a href="pricing.html">Faculty & Stuffs</a></li>
-                                <li><a href="service.html">Media Relations</a></li>
-                                <li><a href="about.html">Alumni</a></li>
-                                <li><a href="about.html">All Awards</a></li>
-                                <li><a href="contact.html">Recent Events</a></li>
+                                <li><a href="{{ url('/about-us') }}">{{ __('lang.about_us') }}</a></li>
+                                <li><a href="{{ url('/district-network') }}">{{ __('lang.district_network') }}</a></li>
+                                <li><a href="{{ url('/contact-head-office') }}">{{ __('lang.contact') .' - '.__('lang.head_office') }}</a></li>
+                                <li><a href="{{ url('/contact-senior-staff') }}">{{ __('lang.contact') .' - '.__('lang.senior_staff') }}</a></li>
+                                <li><a href="{{ url('/contact-district-offices') }}">{{ __('lang.contact') .' - '.__('lang.district_offices') }}</a></li>
+                                <li><a href="{{ url('/circuit-bungalows') }}">{{ __('lang.circuit_bungalows') }}</a></li>
+                                <li><a href="{{ url('/services') }}">{{ __('lang.services') }}</a></li>
+                                <li><a href="{{ url('/press-releases') }}">{{ __('lang.press_releases') }}</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-auto">
                     <div class="widget widget_nav_menu footer-widget">
-                        <h3 class="widget_title">Our Programs</h3>
+                        <h3 class="widget_title">{{ __('lang.downloads') }}</h3>
                         <div class="menu-all-pages-container">
                             <ul class="menu">
-                                <li><a href="about.html">Ungraduate Programs</a></li>
-                                <li><a href="about.html">Graduate Programs</a></li>
-                                <li><a href="about.html">Certificate Programs</a></li>
-                                <li><a href="about.html">Accelerate Programs</a></li>
-                                <li><a href="about.html">Online Programs</a></li>
-                                <li><a href="about.html">Financial Planning</a></li>
-                                <li><a href="about.html">Business Advisory</a></li>
+                                @foreach($navDownloadCategories as $navCat)
+                                    <li><a href="{{ url('downloads/' . $navCat['slug']) }}">{{ $navCat['download_category'] }}</a></li>
+                                @endforeach
                             </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-auto">
-                    <div class="widget th-widget-instagram footer-widget">
-                        <h3 class="widget_title">Instagram</h3>
-                        <div class="instagram-feeds">
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-1.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-1.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-2.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-2.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-3.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-3.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-4.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-4.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-5.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-5.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-6.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-6.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-7.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-7.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-8.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-8.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="insta-thumb">
-                                <img src="{{ asset('assets/frontend/img/widget/insta-feed-1-9.jpg') }}" alt="Image">
-                                <a href="assets/img/widget/insta-feed-1-9.jpg') }}" class="insta-btn popup-image"><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,17 +65,17 @@
                 </div>
                 <div class="col-md-auto">
                     <p class="copyright-text">
-                        <i class="fal fa-copyright"></i> Copyright 2025 <a href="home-university.html">Stadum</a>. All Rights Reserved.
+                        <i class="fal fa-copyright"></i> Copyright {{ date('Y', time()) }} <a href="{{ url('/') }}">National Housing Development Authority</a>. All Rights Reserved.
                     </p>
                 </div>
-                <div class="col-md-auto text-md-end text-center">
+                {{--<div class="col-md-auto text-md-end text-center">
                     <div class="th-social">
                         <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.youtube.com/"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>
