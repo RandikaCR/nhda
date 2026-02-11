@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GeneralAboutDetails;
 use App\Models\News;
 use App\Models\NewsImages;
+use App\Models\PressReleases;
 use App\Models\Projects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -131,6 +132,110 @@ class FrontendController extends Controller
 
         return view('frontend.news.view',[
             'news' => $news,
+        ]);
+    }
+
+
+    public function projectsAndProgrammes(Request $request)
+    {
+        $keyword = !empty($request->keyword) ? $request->keyword : null;
+
+        $projects = Projects::select(
+            'projects.*',
+            'project_images.image AS primary_image',
+        )
+            ->join('project_images', 'projects.id', 'project_images.project_id')
+            ->when(!empty($keyword), function ($query) use ($keyword) {
+                return $query->where('projects.en_title', 'like', "%$keyword%")
+                    ->orWhere('projects.si_title', 'like', "%$keyword%")
+                    ->orWhere('projects.ta_title', 'like', "%$keyword%")
+                    ->orWhere('projects.en_content', 'like', "%$keyword%")
+                    ->orWhere('projects.si_content', 'like', "%$keyword%")
+                    ->orWhere('projects.ta_content', 'like', "%$keyword%");
+            })
+            ->where('project_images.is_primary', 1)
+            ->orderBy('projects.id', 'DESC')
+            ->groupBy('projects.id')
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('frontend.projects.index',[
+            'projects' => $projects,
+            'keyword' => $keyword,
+        ]);
+    }
+
+    public function projectsAndProgramView(Request $request, $slug){
+
+        $project = Projects::select(
+            'projects.*',
+            'project_images.image AS primary_image',
+        )
+            ->join('project_images', 'projects.id', 'project_images.project_id')
+            ->where('projects.slug', $slug)
+            ->where('project_images.is_primary', 1)
+            ->groupBy('projects.id')
+            ->first();
+
+
+        if (empty($project)) {
+            return redirect()->route('frontend.projectsAndProgrammes.index');
+        }
+
+        return view('frontend.projects.view',[
+            'project' => $project,
+        ]);
+    }
+
+
+    public function pressReleases(Request $request)
+    {
+        $keyword = !empty($request->keyword) ? $request->keyword : null;
+
+        $pressReleases = PressReleases::select(
+            'press_releases.*',
+            'press_release_images.image AS primary_image',
+        )
+            ->join('press_release_images', 'press_releases.id', 'press_release_images.press_release_id')
+            ->when(!empty($keyword), function ($query) use ($keyword) {
+                return $query->where('press_releases.en_title', 'like', "%$keyword%")
+                    ->orWhere('press_releases.si_title', 'like', "%$keyword%")
+                    ->orWhere('press_releases.ta_title', 'like', "%$keyword%")
+                    ->orWhere('press_releases.en_content', 'like', "%$keyword%")
+                    ->orWhere('press_releases.si_content', 'like', "%$keyword%")
+                    ->orWhere('press_releases.ta_content', 'like', "%$keyword%");
+            })
+            ->where('press_release_images.is_primary', 1)
+            ->orderBy('press_releases.id', 'DESC')
+            ->groupBy('press_releases.id')
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('frontend.press-releases.index',[
+            'press_releases' => $pressReleases,
+            'keyword' => $keyword,
+        ]);
+    }
+
+    public function pressReleaseView(Request $request, $slug){
+
+        $pressRelease = PressReleases::select(
+            'press_releases.*',
+            'press_release_images.image AS primary_image',
+        )
+            ->join('press_release_images', 'press_releases.id', 'press_release_images.press_release_id')
+            ->where('press_releases.slug', $slug)
+            ->where('press_release_images.is_primary', 1)
+            ->groupBy('press_releases.id')
+            ->first();
+
+
+        if (empty($pressRelease)) {
+            return redirect()->route('frontend.pressReleases.index');
+        }
+
+        return view('frontend.press-releases.view',[
+            'pressRelease' => $pressRelease,
         ]);
     }
 

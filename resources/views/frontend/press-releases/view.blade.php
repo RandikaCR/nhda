@@ -1,14 +1,14 @@
 @extends('layouts.frontend')
 
 @section('page_title')
-{{ $news->en_title }}
+    {{ $pressRelease->en_title }}
 @endsection
 
 
 @section('breadcrumb')
     @php
-        $pageTitle = 'News & Events';
-        $pageSubTitle = $news->en_title;
+        $pageTitle = 'Press Releases';
+        $pageSubTitle = $pressRelease->en_title;
     @endphp
     @include('partials.frontend.breadcrumb')
 @endsection
@@ -20,13 +20,13 @@
                 <div class="col-xl-9">
                     <div class="th-blog blog-single">
                         <div class="blog-img">
-                            <img src="{{ asset('assets/common/images/uploads/' .$news->primary_image) }}" alt="Blog Image">
+                            <img src="{{ asset('assets/common/images/uploads/' .$pressRelease->primary_image) }}" alt="Blog Image">
                         </div>
                         <div class="blog-content">
                             <div class="row justify-content-between mb-2">
                                 <div class="col-md-auto">
                                     <div class="blog-meta">
-                                        <a href="javascript:void(0);"><i class="far fa-clock"></i>{{ dateFormat($news->created_at) }}</a>
+                                        <a href="javascript:void(0);"><i class="far fa-clock"></i>{{ dateFormat($pressRelease->created_at) }}</a>
                                     </div>
                                 </div>
                                 <div class="col-md-auto text-xl-end">
@@ -37,8 +37,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <h3 class="mb-4">{{ $news->en_title }}</h3>
-                            <p class="fs-18">{!! $news->en_content !!}</p>
+                            <h3 class="mb-4">{{ $pressRelease->en_title }}</h3>
+                            <p class="fs-18">{!! $pressRelease->en_content !!}</p>
                             <div class="share-links clearfix ">
                                 <div class="row justify-content-between">
                                     <div class="col-md-auto">

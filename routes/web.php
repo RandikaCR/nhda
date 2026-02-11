@@ -51,8 +51,12 @@ Route::group([ 'prefix' =>'/', 'middleware' => ['setLocale']], function () {
     Route::get('/', [Frontend::class, 'index'])->name('frontend.homepage');
     Route::get('/about-us', [Frontend::class, 'aboutUs'])->name('frontend.newsAndEvents.aboutUs');
     Route::get('/news-and-events', [Frontend::class, 'newsAndEvents'])->name('frontend.newsAndEvents.index');
-    Route::get('/projects-and-programmes', [Frontend::class, 'newsAndEvents'])->name('frontend.newsAndEvents.index');
     Route::get('/news/{slug}', [Frontend::class, 'newsAndEventsView'])->name('frontend.newsAndEvents.view');
+    Route::get('/projects-and-programmes', [Frontend::class, 'projectsAndProgrammes'])->name('frontend.projectsAndProgrammes.index');
+    Route::get('/project/{slug}', [Frontend::class, 'projectsAndProgramView'])->name('frontend.projectsAndProgrammes.view');
+    Route::get('/press-releases', [Frontend::class, 'pressReleases'])->name('frontend.pressReleases.index');
+    Route::get('/press-release/{slug}', [Frontend::class, 'pressReleaseView'])->name('frontend.pressReleases.view');
+
 
     Route::get('/set-localization/{lang}', [Frontend::class, 'localization'])->name('frontend.localization');
 
